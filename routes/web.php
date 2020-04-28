@@ -20,7 +20,7 @@ Route::get('/guru', function () {
 });
 
 Route::get('/siswa', function () {
-    return view('admin.index');
+    return view('murid.index');
 });
 
 Auth::routes();

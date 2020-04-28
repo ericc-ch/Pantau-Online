@@ -1,4 +1,4 @@
-@extends('layouts.siswa.main')
+@extends('layouts.murid.main')
 
 @section('content')
 <div class="content-wrapper">
