@@ -14,18 +14,26 @@
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                 <li class="nav-item has-treeview menu-open">
-                    <a href="/peserta" class="nav-link active">
+                    <a href="/murid" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            Mengisi Biodata
+                            Dashboard
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                    <a href="/murid/data-diri" class="nav-link">
+                        <i class="nav-icon fas fa-edit"></i>
                         <p>
-                            Cetak Bukti Pendaftaraan
+                            Ubah data Diri
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/murid/jadwal" class="nav-link">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>
+                            Set Jadwal
                         </p>
                     </a>
                 </li>

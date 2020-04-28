@@ -19,9 +19,15 @@ Route::get('/guru', function () {
     return view('guru.index');
 });
 
-Route::get('/siswa', function () {
-    return view('murid.index');
+Route::group(['prefix'=>'murid'], function (){
+    Route::get('/', function () {
+        return view('murid.index');
+    });
+    Route::get('/data-diri', function () {
+        return view('murid.datadiri');
+    });
 });
+
 
 Auth::routes();
 
