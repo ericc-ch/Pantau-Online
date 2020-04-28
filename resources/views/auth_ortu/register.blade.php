@@ -12,6 +12,20 @@
                         @csrf
 
                         <div class="form-group row">
+                            <label for="nik" class="col-md-4 col-form-label text-md-right">{{ __('NIK Anda') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="nik" type="number" class="form-control @error('nik') is-invalid @enderror" name="nik" value="{{ old('nik') }}" required autocomplete="nik">
+
+                                @error('nik')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="nama" class="col-md-4 col-form-label text-md-right">{{ __('Nama lengkap') }}</label>
 
                             <div class="col-md-6">

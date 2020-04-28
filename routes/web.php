@@ -11,28 +11,6 @@
 |
 */
 
-Route::get('/admin', function () {
-    return view('admin.index');
-});
-
-Route::get('/guru', function () {
-    return view('guru.index');
-});
-
-Route::group(['prefix'=>'murid'], function (){
-    Route::get('/', function () {
-        return view('murid.index');
-    });
-    Route::get('/data-diri', function () {
-        return view('murid.datadiri');
-    });
-});
-
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::group(['prefix' => 'admin'], function() {
     Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'AdminAuth\LoginController@login')->name('admin.login.submit');
@@ -58,3 +36,26 @@ Route::group(['prefix' => 'ortu'], function() {
         return "Ortu udh login";
     })->name('admin.dashboard');
 });
+
+Route::get('/admin', function () {
+    return view('admin.index');
+});
+
+Route::get('/guru', function () {
+    return view('guru.index');
+});
+
+Route::group(['prefix'=>'murid'], function (){
+    Route::get('/', function () {
+        return view('murid.index');
+    });
+    Route::get('/data-diri', function () {
+        return view('murid.datadiri');
+    });
+});
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+

@@ -23,15 +23,17 @@ class RegisterController extends Controller
     {
         $validator = $request->validate([
             'nik' => ['string', 'max:255'],
-            'nama' => ['required', 'string', 'max:255', 'unique:ortu'],
+            'nama' => ['required', 'string', 'max:255'],
             'nis' => ['required', 'integer', 'min:8'],
-            'username' => ['required', 'string', 'username', 'max:255', 'unique:ortu'],
-            'password' => ['required', 'string', 'password', 'min:8', 'confirmed'],
+            'username' => ['required', 'string', 'max:255', 'unique:ortu'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
+
+        $validator['password'] = Hash::make($validator['password']);
 
         \App\Ortu::create($validator);
 
-        return redirect('ortu.login');
+        return redirect()->route('ortu.login');
     }
 
     // /*

@@ -42,7 +42,7 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        return view('ortu.auth.login');
+        return view('auth_ortu.login');
     }
 
     public function login(Request $request)
