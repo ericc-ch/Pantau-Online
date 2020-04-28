@@ -31,10 +31,10 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $validator = $request->validate([
-            'nik' => ['string', 'max:255'],
+            'nip' => ['string', 'max:255'],
             'nama' => ['required', 'string', 'max:255'],
-            'nis' => ['required', 'integer', 'min:8'],
-            'username' => ['required', 'string', 'max:255', 'unique:ortu'],
+            'id_mapel' => ['required', 'integer'],
+            'username' => ['required', 'string', 'max:255', 'unique:guru'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
@@ -42,6 +42,6 @@ class RegisterController extends Controller
 
         \App\Guru::create($validator);
 
-        return redirect()->route('ortu.login');
+        return redirect()->route('guru.login');
     }
 }
