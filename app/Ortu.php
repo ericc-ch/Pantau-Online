@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Foundation\Auth\User as Akun;
 
-class Ortu extends Authenticatable
+class Ortu extends Akun
 {
     protected $table = 'ortu';
 
