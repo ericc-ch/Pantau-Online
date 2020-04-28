@@ -16,7 +16,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'nis', 'name', 'jk', 'rombel',
+        'rayon', 'username', 'password',
     ];
 
     /**
@@ -36,4 +37,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    
+
+    // RELATIONSHIP
+    public function ortus()
+    {
+        return $this->hasMany('App\Ortu', 'nis');
+    }
+    public function jadwals()
+    {
+        return $this->hasMany('App\Jadwalkegiatan', 'nis');
+    }
+
+    
 }
