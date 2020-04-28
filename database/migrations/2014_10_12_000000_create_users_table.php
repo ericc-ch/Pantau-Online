@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('jk');
             $table->string('rombel');
             $table->string('rayon');
-            $table->string('username')->unique();
+            $table->string('username');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
