@@ -2,11 +2,13 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Ortu extends Model
+class Ortu extends Authenticatable
 {
     protected $table = 'ortu';
+
+    protected $guard = 'ortu';
 
     protected $fillable = [
         'nik', 'nama', 'nis',

@@ -24,7 +24,7 @@ Route::group(['prefix' => 'guru'], function() {
     Route::post('/login', 'GuruAuth\LoginController@login')->name('guru.login.submit');
     Route::get('/dashboard', function() {
         return "Guru udh login";
-    })->name('admin.dashboard');
+    })->name('guru.dashboard');
 });
 
 Route::group(['prefix' => 'ortu'], function() {
@@ -34,7 +34,7 @@ Route::group(['prefix' => 'ortu'], function() {
     Route::post('/register', 'OrtuAuth\RegisterController@register')->name('ortu.register.submit');
     Route::get('/dashboard', function() {
         return "Ortu udh login";
-    })->name('admin.dashboard');
+    })->name('ortu.dashboard');
 });
 
 Route::get('/admin', function () {

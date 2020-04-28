@@ -48,20 +48,20 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required|email',
+            'username' => 'required',
             'password' => 'required',
         ]);
 
         $credentials = [
-            'email' => $request->email,
+            'username' => $request->username,
             'password' => $request->password,
         ];
  
         if (Auth::guard('ortu')->attempt($credentials, $request->member))
         {
-            return redirect()->intended(route('admin.dashboard'));
+            return redirect()->intended(route('ortu.dashboard'));
         }
 
-        return redirect()->back()->withInput($request->only('email', 'remember'));
+        return redirect()->back()->withInput($request->only('username', 'remember'));
     }
 }
