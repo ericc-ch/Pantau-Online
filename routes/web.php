@@ -11,8 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/admin', function () {
+    return view('admin.index');
+});
+
+Route::get('/guru', function () {
+    return view('guru.index');
+});
+
+Route::get('/siswa', function () {
+    return view('admin.index');
 });
 
 Auth::routes();
