@@ -11,13 +11,15 @@
                     <form method="POST" action="{{ route('ortu.register.submit') }}">
                         @csrf
 
+                        
+
                         <div class="form-group row">
-                            <label for="nik" class="col-md-4 col-form-label text-md-right">{{ __('NIP Anda') }}</label>
+                            <label for="nip" class="col-md-4 col-form-label text-md-right">{{ __('NIP Anda') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nik" type="number" class="form-control @error('nik') is-invalid @enderror" name="nik" value="{{ old('nik') }}" required autocomplete="nik">
+                                <input id="nip" type="number" class="form-control @error('nip') is-invalid @enderror" name="nip" value="{{ old('nip') }}" required autocomplete="nip">
 
-                                @error('nik')
+                                @error('nip')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -39,19 +41,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="nis" class="col-md-4 col-form-label text-md-right">{{ __('NIS anak Anda') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="nis" type="number" class="form-control @error('nis') is-invalid @enderror" name="nis" value="{{ old('nis') }}" required autocomplete="nis">
-
-                                @error('nis')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                        <input type="hidden" name="id_mapel" value="1">
 
                         <div class="form-group row">
                             <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>

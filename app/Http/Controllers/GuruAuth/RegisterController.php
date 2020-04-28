@@ -40,7 +40,7 @@ class RegisterController extends Controller
 
         $validator['password'] = Hash::make($validator['password']);
 
-        \App\Ortu::create($validator);
+        \App\Guru::create($validator);
 
         return redirect()->route('ortu.login');
     }
