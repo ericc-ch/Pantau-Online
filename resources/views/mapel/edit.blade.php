@@ -54,7 +54,7 @@
 
                 <div class="form-group">
 
-                    <strong>Name:</strong>
+                    <strong>Name Mapel</strong>
 
                     <input type="text" name="nama_mapel" value="{{ $mapel->nama_mapel }}" class="form-control" placeholder="Nama Mapel">
 
