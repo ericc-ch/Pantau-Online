@@ -49,17 +49,17 @@ return [
 
         'admin' => [
             'driver' => 'session',
-            'provider' => 'admins',
+            'provider' => 'admin',
         ],
 
         'guru' => [
             'driver' => 'session',
-            'provider' => 'gurus',
+            'provider' => 'guru',
         ],
 
         'ortu' => [
             'driver' => 'session',
-            'provider' => 'ortus',
+            'provider' => 'ortu',
         ],
     ],
 
@@ -86,17 +86,17 @@ return [
             'model' => App\User::class,
         ],
 
-        'admins' => [
+        'admin' => [
             'driver' => 'eloquent',
             'model' => App\Admin::class,
         ],
 
-        'gurus' => [
+        'guru' => [
             'driver' => 'eloquent',
             'model' => App\Guru::class,
         ],
 
-        'ortus' => [
+        'ortu' => [
             'driver' => 'eloquent',
             'model' => App\Ortu::class,
         ],

@@ -23,9 +23,9 @@ class RegisterController extends Controller
     {
         $validator = $request->validate([
             'nik' => ['string', 'max:255'],
-            'nama' => ['required', 'string', 'max:255', 'unique:ortus'],
+            'nama' => ['required', 'string', 'max:255', 'unique:ortu'],
             'nis' => ['required', 'integer', 'min:8'],
-            'username' => ['required', 'string', 'username', 'max:255', 'unique:ortus'],
+            'username' => ['required', 'string', 'username', 'max:255', 'unique:ortu'],
             'password' => ['required', 'string', 'password', 'min:8', 'confirmed'],
         ]);
 
