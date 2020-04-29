@@ -41,18 +41,9 @@ Route::group(['prefix' => 'ortu'], function() {
 
 
 Route::group(['prefix'=>'murid'], function (){
-<<<<<<< HEAD
     Route::get('/','MuridController@index')->name('murid.index');
     Route::get('/data-diri','MuridController@edit')->name('murid.edit');
     Route::put('/data-diri','MuridController@update')->name('murid.update');
-=======
-    Route::get('/', function () {
-        return view('murid.index');
-    })->name('murid.dashboard');
-    Route::get('/data-diri', function () {
-        return view('murid.datadiri');
-    });
->>>>>>> 1d740001efcd0225c4dc535cbc73ee2d10be3b7a
     Route::get('/jadwal', 'JadwalController@index')->name('jadwal.index');
     Route::post('/jadwal', 'JadwalController@store')->name('jadwal.store');
 });
