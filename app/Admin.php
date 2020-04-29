@@ -2,11 +2,13 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Akun;
 
-class Admin extends Model
+class Admin extends Akun
 {
     protected $table = 'admin';
+
+    protected $guard = 'admin';
 
     protected $fillable = ['nama', 'username', 'password'];
 }
