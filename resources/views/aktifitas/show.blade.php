@@ -1,4 +1,4 @@
-@extends('mapel.layout')
+@extends('aktifitas.layout')
 
 @section('content')
 
@@ -8,7 +8,7 @@
 
             <div class="pull-left">
 
-                <h2> Show Mapel</h2>
+                <h2> Show Aktifitas</h2>
 
             </div>
 
@@ -22,17 +22,14 @@
 
     </div>
 
-   
-
     <div class="row">
 
         <div class="col-xs-12 col-sm-12 col-md-12">
 
             <div class="form-group">
 
-                <strong>Nama Mapel:</strong>
-                
-                {{ $aktifitas->id_aktifitas }}
+                <strong>Nama Aktifitas : </strong>
+
                 {{ $aktifitas->nama_aktifitas }}
 
             </div>

@@ -30,7 +30,7 @@ class AktifitasController extends Controller
     {
         return view('aktifitas.create');
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -44,7 +44,9 @@ class AktifitasController extends Controller
         ]);
 
         Aktifitas::create($request->all());
+
         return redirect()->route('aktifitas.index')
+
                         ->with('success','Aktifitas created successfully.');
     }
 
@@ -56,7 +58,7 @@ class AktifitasController extends Controller
      */
     public function show(Aktifitas $aktifitas)
     {
-        return view('aktifitas.show',compact('aktifitas'));
+         return view('aktifitas.show',compact('aktifitas'));
     }
 
     /**
@@ -83,9 +85,10 @@ class AktifitasController extends Controller
             'nama_aktifitas' => 'required',
         ]);
 
-        $aktifitas::update($request->all());
+        $aktifitas->update($request->all());
+
         return redirect()->route('aktifitas.index')
-                        ->with('success','Aktifitas created successfully.');
+                        ->with('success','Aktifitas updated successfully');
     }
 
     /**
@@ -97,6 +100,7 @@ class AktifitasController extends Controller
     public function destroy(Aktifitas $aktifitas)
     {
         $aktifitas->delete();
+
         return redirect()->route('aktifitas.index')
                         ->with('success','Aktifitas deleted successfully');
     }

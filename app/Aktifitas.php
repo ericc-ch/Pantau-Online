@@ -8,11 +8,10 @@ class Aktifitas extends Model
 {
     protected $table = 'aktifitas';
     protected $primaryKey = 'id_aktifitas';
-
     protected $fillable = ['nama_aktifitas'];
 
     public function jadwals()
     {
-        return $this->haMany('App\Detailjadwal', 'id_aktifitas');
+        return $this->hasMany('App\Detailjadwal', 'id_aktifitas');
     }
 }

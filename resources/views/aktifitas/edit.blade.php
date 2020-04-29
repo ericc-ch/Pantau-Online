@@ -1,5 +1,7 @@
 @extends('aktifitas.layout')
 
+   
+
 @section('content')
 
     <div class="row">
@@ -8,7 +10,7 @@
 
             <div class="pull-left">
 
-                <h2>Edit Product</h2>
+                <h2>Edit Aktifitas</h2>
 
             </div>
 
@@ -21,6 +23,8 @@
         </div>
 
     </div>
+
+   
 
     @if ($errors->any())
 
@@ -42,11 +46,15 @@
 
     @endif
 
+  
+
     <form action="{{ route('aktifitas.update',$aktifitas->id_aktifitas) }}" method="POST">
 
         @csrf
 
         @method('PUT')
+
+   
 
          <div class="row">
 
@@ -54,7 +62,7 @@
 
                 <div class="form-group">
 
-                    <strong>Name Aktifitas:</strong>
+                    <strong>Name:</strong>
 
                     <input type="text" name="nama_aktifitas" value="{{ $aktifitas->nama_aktifitas }}" class="form-control" placeholder="Nama Aktifitas">
 

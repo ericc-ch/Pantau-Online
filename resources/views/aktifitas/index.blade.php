@@ -8,7 +8,7 @@
 
             <div class="pull-left">
 
-                <h2>Data Aktifitas</h2>
+                <h2>Laravel 5.8 CRUD Example from scratch - ItSolutionStuff.com</h2>
 
             </div>
 
@@ -49,7 +49,7 @@
         <tr>
 
             <td>{{ ++$i }}</td>
-
+            
             <td>{{ $aktif->nama_aktifitas }}</td>
 
             <td>
@@ -61,7 +61,6 @@
                     <a class="btn btn-primary" href="{{ route('aktifitas.edit',$aktif->id_aktifitas) }}">Edit</a>
 
                     @csrf
-
                     @method('DELETE')
 
                     <button type="submit" class="btn btn-danger">Delete</button>

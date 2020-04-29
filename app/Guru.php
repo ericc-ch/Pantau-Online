@@ -2,11 +2,13 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Akun;
 
-class Guru extends Model
+class Guru extends Akun
 {
     protected $table = 'guru';
+
+    protected $guard = 'guru';
 
     protected $fillable = [
         'nip', 'nama', 'id_mapel',

@@ -52,7 +52,7 @@
 
             <div class="form-group">
 
-                <strong>Name:</strong>
+                <strong>Nama Aktifitas</strong>
 
                 <input type="text" name="nama_aktifitas" class="form-control" placeholder="Nama Aktifitas">
 
@@ -63,7 +63,6 @@
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
 
                 <button type="submit" class="btn btn-primary">Submit</button>
-
         </div>
 
     </div>

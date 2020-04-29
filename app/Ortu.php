@@ -2,11 +2,13 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Akun;
 
-class Ortu extends Model
+class Ortu extends Akun
 {
     protected $table = 'ortu';
+
+    protected $guard = 'ortu';
 
     protected $fillable = [
         'nik', 'nama', 'nis',

@@ -1,4 +1,5 @@
-<DOCTYPE html>
+
+<!DOCTYPE html>
 
 <html>
 
@@ -12,11 +13,16 @@
 
 <body>
 
+  
+
 <div class="container">
 
     @yield('content')
 
 </div>
 
+   
+
 </body>
+
 </html>
