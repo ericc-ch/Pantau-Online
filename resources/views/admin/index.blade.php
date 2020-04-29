@@ -1,4 +1,4 @@
-@extends('layouts.murid.main')
+@extends('layouts.admin.main')
 
 @section('content')
 <div class="content-wrapper">

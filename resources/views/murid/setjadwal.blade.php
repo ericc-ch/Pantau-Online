@@ -38,7 +38,7 @@
                                 <div class="form-group">
                                     <label>Id Jadwal</label>
                                     <input type="text" name="id_jadwal" id="id_jadwal" class="form-control"
-                                        required="true">
+                                        required="true" value="{{$id}}">
                                 </div>
                             </div>
 
@@ -75,11 +75,8 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Aktifitas</label>
-                                    <select name="id_aktifitas" id="id_aktifitas" class="form-control" required="true">
-                                        <option value=""></option>
-                                        <option value="1">Sistem Informasi</option>
-                                        <option value="2">Teknik Informatika</option>
-                                    </select>
+                                    <input type="text" name="aktifitas" id="aktifitas" class="form-control"
+                                        required="true">
                                 </div>
                             </div>
                         </div>
