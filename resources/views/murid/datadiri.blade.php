@@ -37,7 +37,7 @@
                                 <div class="form-group">
                                     <label>NIS</label>
                                     <input type="text" name="nama" id="nama" class="form-control"
-                                        required="true">
+                                        required="true" value="{{$murid->nis}}">
                                 </div>
                             </div>
 
@@ -45,7 +45,7 @@
                                 <div class="form-group">
                                     <label>Nama</label>
                                     <input type="text" name="nama" id="nama" class="form-control"
-                                        required="true">
+                                        required="true" value="{{$murid->nis}}">
                                 </div>
                             </div>
                         </div>
