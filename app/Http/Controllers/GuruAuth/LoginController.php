@@ -10,33 +10,65 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+
+    use AuthenticatesUsers;
+
+    protected $redirectTo = RouteServiceProvider::GURU_HOME;
+
+    public function showLoginForm(Request $request)
+    {
+        return view('auth_guru.login');
+    }
+
+    protected function guard()
+    {
+        return Auth::guard('guru');
+    }
+
+    public function username()
+    {
+        return 'username';
+    }
+
     public function __construct()
     {
         $this->middleware('guest:guru')->except('logout');
     }
 
-    public function showLoginForm()
+    protected function authenticated(Request $request, $user)
     {
-        return view('auth_guru.login');
+        $user = $this->guard()->user();
+        Auth::setUser($user);
     }
 
-    public function login(Request $request)
-    {
-        $this->validate($request, [
-            'username' => 'required',
-            'password' => 'required',
-        ]);
 
-        $credentials = [
-            'username' => $request->username,
-            'password' => $request->password,
-        ];
+    // public function __construct()
+    // {
+    //     $this->middleware('guest:guru')->except('logout');
+    // }
+
+    // public function showLoginForm()
+    // {
+    //     return view('auth_guru.login');
+    // }
+
+    // public function login(Request $request)
+    // {
+    //     $this->validate($request, [
+    //         'username' => 'required',
+    //         'password' => 'required',
+    //     ]);
+
+    //     $credentials = [
+    //         'username' => $request->username,
+    //         'password' => $request->password,
+    //     ];
  
-        if (Auth::guard('guru')->attempt($credentials, $request->member))
-        {
-            return redirect()->intended(route('guru.dashboard'));
-        }
+    //     if (Auth::guard('guru')->attempt($credentials, $request->member))
+    //     {
+    //         return redirect()->intended(route('guru.dashboard'));
+    //     }
 
-        return redirect()->back()->withInput($request->only('username', 'remember'));
-    }
+    //     return redirect()->back()->withInput($request->only('username', 'remember'));
+    // }
 }

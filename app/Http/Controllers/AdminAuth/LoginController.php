@@ -11,33 +11,33 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
+    use AuthenticatesUsers;
+
+    protected $redirectTo = RouteServiceProvider::ORTU_HOME;
+
+    public function showLoginForm(Request $request)
+    {
+        return view('auth_admin.login');
+    }
+
+    protected function guard()
+    {
+        return Auth::guard('admin');
+    }
+
+    public function username()
+    {
+        return 'username';
+    }
+
     public function __construct()
     {
         $this->middleware('guest:admin')->except('logout');
     }
 
-    public function showLoginForm()
+    protected function authenticated(Request $request, $user)
     {
-        return view('auth_admin.login');
-    }
-
-    public function login(Request $request)
-    {
-        $this->validate($request, [
-            'username' => 'required',
-            'password' => 'required',
-        ]);
-
-        $credentials = [
-            'username' => $request->username,
-            'password' => $request->password,
-        ];
- 
-        if (Auth::guard('admin')->attempt($credentials, $request->member))
-        {
-            return redirect()->intended(route('admin.dashboard'));
-        }
-
-        return redirect()->back()->withInput($request->only('username', 'remember'));
+        $user = $this->guard()->user();
+        Auth::setUser($user);
     }
 }
