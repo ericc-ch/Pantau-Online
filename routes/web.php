@@ -15,7 +15,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'AdminAuth\LoginController@login')->name('admin.login.submit');
     Route::get('/dashboard', function() {
-        return "Admin udh login";
+        return view('admin.index');
     })->name('admin.dashboard');
 });
 
@@ -25,7 +25,7 @@ Route::group(['prefix' => 'guru'], function() {
     Route::get('/register', 'GuruAuth\RegisterController@showRegisterForm')->name('guru.register');
     Route::post('/register', 'GuruAuth\RegisterController@register')->name('guru.register.submit');
     Route::get('/dashboard', function() {
-        return "Guru udh login";
+        return view('guru.index');
     })->name('guru.dashboard');
 });
 
@@ -35,17 +35,10 @@ Route::group(['prefix' => 'ortu'], function() {
     Route::get('/register', 'OrtuAuth\RegisterController@showRegisterForm')->name('ortu.register');
     Route::post('/register', 'OrtuAuth\RegisterController@register')->name('ortu.register.submit');
     Route::get('/dashboard', function() {
-        return "Ortu udh login";
+        return view('ortu.index');
     })->name('ortu.dashboard');
 });
 
-Route::get('/admin', function () {
-    return view('admin.index');
-});
-
-Route::get('/guru', function () {
-    return view('guru.index');
-});
 
 Route::group(['prefix'=>'murid'], function (){
     Route::get('/', function () {
