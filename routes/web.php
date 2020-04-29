@@ -22,8 +22,8 @@ Route::group(['prefix' => 'admin'], function() {
 Route::group(['prefix' => 'guru'], function() {
     Route::get('/login', 'GuruAuth\LoginController@showLoginForm')->name('guru.login');
     Route::post('/login', 'GuruAuth\LoginController@login')->name('guru.login.submit');
-    Route::get('/register', 'GuruAuth\RegisterController@showRegisterForm')->name('guru.register');
-    Route::post('/register', 'GuruAuth\RegisterController@register')->name('guru.register.submit');
+    // Route::get('/register', 'GuruAuth\RegisterController@showRegisterForm')->name('guru.register');
+    // Route::post('/register', 'GuruAuth\RegisterController@register')->name('guru.register.submit');
     Route::get('/dashboard', function() {
         return view('guru.index');
     })->name('guru.dashboard');

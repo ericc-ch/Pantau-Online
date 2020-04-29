@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
+
     public function showRegisterForm()
     {
         return view('auth_ortu.register');

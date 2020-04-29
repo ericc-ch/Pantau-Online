@@ -10,33 +10,61 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+
+    use AuthenticatesUsers;
+
     public function __construct()
     {
         $this->middleware('guest:guru')->except('logout');
     }
 
-    public function showLoginForm()
+    protected $redirectTo = RouteServiceProvider::GURU_HOME;
+
+    public function showLoginForm(Request $request)
     {
         return view('auth_guru.login');
     }
 
-    public function login(Request $request)
+    protected function guard()
     {
-        $this->validate($request, [
-            'username' => 'required',
-            'password' => 'required',
-        ]);
-
-        $credentials = [
-            'username' => $request->username,
-            'password' => $request->password,
-        ];
- 
-        if (Auth::guard('guru')->attempt($credentials, $request->member))
-        {
-            return redirect()->intended(route('guru.dashboard'));
-        }
-
-        return redirect()->back()->withInput($request->only('username', 'remember'));
+        return Auth::guard('guru');
     }
+
+    public function username()
+    {
+        return 'username';
+    }
+
+
+
+
+    // public function __construct()
+    // {
+    //     $this->middleware('guest:guru')->except('logout');
+    // }
+
+    // public function showLoginForm()
+    // {
+    //     return view('auth_guru.login');
+    // }
+
+    // public function login(Request $request)
+    // {
+    //     $this->validate($request, [
+    //         'username' => 'required',
+    //         'password' => 'required',
+    //     ]);
+
+    //     $credentials = [
+    //         'username' => $request->username,
+    //         'password' => $request->password,
+    //     ];
+ 
+    //     if (Auth::guard('guru')->attempt($credentials, $request->member))
+    //     {
+    //         return redirect()->intended(route('guru.dashboard'));
+    //     }
+
+    //     return redirect()->back()->withInput($request->only('username', 'remember'));
+    // }
 }
