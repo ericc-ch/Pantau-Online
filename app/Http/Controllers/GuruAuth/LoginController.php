@@ -13,11 +13,6 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    public function __construct()
-    {
-        $this->middleware('guest:guru')->except('logout');
-    }
-
     protected $redirectTo = RouteServiceProvider::GURU_HOME;
 
     public function showLoginForm(Request $request)
@@ -35,7 +30,10 @@ class LoginController extends Controller
         return 'username';
     }
 
-
+    public function __construct()
+    {
+        $this->middleware('guest:guru')->except('logout');
+    }
 
 
     // public function __construct()
