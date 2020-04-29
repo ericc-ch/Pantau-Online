@@ -35,7 +35,7 @@ class LoginController extends Controller
         $this->middleware('guest:admin')->except('logout');
     }
 
-    protected function authenticated(Request $request, $user)
+    public function authenticated(Request $request, $user)
     {
         $user = $this->guard()->user();
         Auth::setUser($user);
