@@ -26,6 +26,8 @@ Route::group(['prefix'=>'murid'], function (){
     Route::get('/data-diri', function () {
         return view('murid.datadiri');
     });
+    Route::get('/jadwal', 'JadwalController@index')->name('jadwal.index');
+    Route::post('/jadwal', 'JadwalController@store')->name('jadwal.store');
 });
 
 
