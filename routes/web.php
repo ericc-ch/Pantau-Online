@@ -43,7 +43,7 @@ Route::group(['prefix' => 'ortu'], function() {
 Route::group(['prefix'=>'murid'], function (){
     Route::get('/', function () {
         return view('murid.index');
-    });
+    })->name('murid.dashboard');
     Route::get('/data-diri', function () {
         return view('murid.datadiri');
     });
