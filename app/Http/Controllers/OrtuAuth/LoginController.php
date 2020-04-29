@@ -34,4 +34,10 @@ class LoginController extends Controller
     {
         $this->middleware('guest:ortu')->except('logout');
     }
+
+    protected function authenticated(Request $request, $user)
+    {
+        $user = $this->guard()->user();
+        Auth::setUser($user);
+    }
 }
