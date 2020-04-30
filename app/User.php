@@ -40,4 +40,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Ortu', 'id_pemilik', 'nik');
     }
+    public function admin()
+    {
+        return $this->belongsTo('App\Ortu', 'id_pemilik')
+    }
 }
