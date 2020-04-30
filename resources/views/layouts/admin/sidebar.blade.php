@@ -17,15 +17,15 @@
                     <a href="/peserta" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            Mengisi Biodata
+                            Dashboard
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="{{ route('admin.siswa.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Cetak Bukti Pendaftaraan
+                            Data Siswa
                         </p>
                     </a>
                 </li>
