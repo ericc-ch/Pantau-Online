@@ -14,7 +14,12 @@ class CreateSiswasTable extends Migration
     public function up()
     {
         Schema::create('siswas', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->integer('nis')->primary();
+            $table->string('nama');
+            $table->string('jk');
+            $table->string('rombel');
+            $table->string('rayon');
+            $table->integer('id_akun')->unique();
             $table->timestamps();
         });
     }

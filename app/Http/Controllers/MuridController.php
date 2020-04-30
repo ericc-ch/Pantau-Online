@@ -7,6 +7,11 @@ use App\User;
 
 class MuridController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('cekuser');
+    }
+
     /**
      * Display a listing of the resource.
      *

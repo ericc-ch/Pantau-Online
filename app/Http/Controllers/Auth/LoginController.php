@@ -35,12 +35,6 @@ class LoginController extends Controller
         return 'username';
     }
 
-    protected function authenticated(Request $request, $user)
-    {
-        $user = $this->guard()->user();
-        Auth::setUser($user);
-    }
-
     /**
      * Create a new controller instance.
      *
@@ -49,5 +43,6 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        $this->middleware('ceklogin');
     }
 }

@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\Siswa;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -50,7 +53,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'nis' => ['required', 'integer'],
+            'nis' => ['required', 'integer', 'unique:siswas'],
             'nama' => ['required', 'string', 'max:255'],
             'jk' => ['required'],
             'rombel' => ['required'],
@@ -69,13 +72,48 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
+            'username' => $data['username'],
+            'password' => Hash::make($data['password']),
+            'id_pemilik' => $data['nis'],
+        ]);
+    }
+
+        /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        $this->registered($request, $user);
+        return redirect($this->redirectPath());
+    }
+
+    /**
+     * The user has been registered.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function registered(Request $request, $user)
+    {
+        $data = $request->all();
+
+        return Siswa::create([
             'nis' => $data['nis'],
             'nama' => $data['nama'],
             'jk' => $data['jk'],
             'rombel' => $data['rombel'],
             'rayon' => $data['rayon'],
-            'username' => $data['username'],
-            'password' => Hash::make($data['password']),
+            'id_akun' => $user->id,
         ]);
     }
 }

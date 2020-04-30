@@ -10,19 +10,13 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    public function getAuthIdentifierName()
-    {
-        return 'nis';
-    }
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'nis', 'nama', 'jk', 'rombel',
-        'rayon', 'username', 'password',
+        'username', 'password', 'id_pemilik',
     ];
 
     /**
@@ -34,26 +28,16 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-
-    
-
-    // RELATIONSHIP
-    public function ortus()
+    public function siswa()
     {
-        return $this->hasMany('App\Ortu', 'nis');
+        return $this->belongsTo('App\Siswa', 'id_pemilik', 'nis');
     }
-    public function jadwals()
+    public function guru()
     {
-        return $this->hasMany('App\Jadwalkegiatan', 'nis');
+        return $this->belongsTo('App\Guru', 'id_pemilik', 'nip');
     }
-
-    
+    public function ortu()
+    {
+        return $this->belongsTo('App\Ortu', 'id_pemilik', 'nik');
+    }
 }

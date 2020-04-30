@@ -14,11 +14,10 @@ class CreateGuruTable extends Migration
     public function up()
     {
         Schema::create('guru', function (Blueprint $table) {
-            $table->integer('nip');
+            $table->integer('nip')->primary();
             $table->string('nama');
             $table->integer('id_mapel');
-            $table->string('username');
-            $table->string('password');
+            $table->integer('id_akun')->unique();
             $table->timestamps();
         });
     }
