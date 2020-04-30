@@ -14,11 +14,10 @@ class CreateOrtuTable extends Migration
     public function up()
     {
         Schema::create('ortu', function (Blueprint $table) {
-            $table->integer('nik');
+            $table->integer('nik')->primary();
             $table->string('nama');
             $table->integer('nis')->unsigned();
-            $table->string('username');
-            $table->string('password');
+            $table->integer('id_akun')->unique();
             $table->timestamps();
         });
     }
