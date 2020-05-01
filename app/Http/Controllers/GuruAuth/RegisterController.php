@@ -5,6 +5,8 @@ namespace App\Http\Controllers\GuruAuth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\Guru;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -23,25 +25,101 @@ class RegisterController extends Controller
     |
     */
 
-    public function showRegisterForm()
+    use RegistersUsers;
+
+    /**
+     * Where to redirect users after registration.
+     *
+     * @var string
+     */
+    protected $redirectTo = RouteServiceProvider::GURU_HOME;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('guest:guru');
+    }
+
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
     {
         return view('auth_guru.register');
     }
 
-    public function register(Request $request)
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
     {
-        $validator = $request->validate([
-            'nip' => ['string', 'max:255'],
+        return Validator::make($data, [
+            'nip' => ['required', 'integer', 'unique:guru'],
             'nama' => ['required', 'string', 'max:255'],
-            'id_mapel' => ['required', 'integer'],
-            'username' => ['required', 'string', 'max:255', 'unique:guru'],
+            'id_mapel' => ['required'],
+            'username' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
+    }
 
-        $validator['password'] = Hash::make($validator['password']);
+    /**
+     * Create a new user instance after a valid registration.
+     *
+     * @param  array  $data
+     * @return \App\User
+     */
+    protected function create(array $data)
+    {
+        return User::create([
+            'username' => $data['username'],
+            'password' => Hash::make($data['password']),
+            'id_pemilik' => $data['nip'],
+        ]);
+    }
 
-        \App\Guru::create($validator);
+    /**
+     * The user has been registered.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function registered(Request $request, $user)
+    {
+        $data = $request->all();
 
-        return redirect()->route('guru.login');
+        return Guru::create([
+            'nip' => $data['nip'],
+            'nama' => $data['nama'],
+            'id_mapel' => $data['id_mapel'],
+            'id_akun' => $user->id,
+        ]);
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        $this->registered($request, $user);
+        return redirect($this->redirectPath());
     }
 }

@@ -16,22 +16,29 @@ class RedirectIfAuthenticated
      * @param  string|null  $guard
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle($request, Closure $next)
     {
-        if (Auth::guard($guard)->check()) {
-            switch ($guard) {
-                case 'admin':
-                    return redirect(RouteServiceProvider::ADMIN_HOME);
-                break;
-                case 'ortu':
-                    return redirect(RouteServiceProvider::ORTU_HOME);
-                break;
-                case 'guru':
-                    return redirect(RouteServiceProvider::GURU_HOME);
-                break;
-                default:
-                    return redirect(RouteServiceProvider::HOME);
+        if (Auth::check()) {
+            if (isset(Auth::user()->guru))
+            {
+                return redirect(RouteServiceProvider::GURU_HOME);
             }
+
+            if (isset(Auth::user()->ortu))
+            {
+                return redirect(RouteServiceProvider::ORTU_HOME);
+            }
+        
+            if (isset(Auth::user()->admin))
+            {
+                return redirect(RouteServiceProvider::ADMIN_HOME);
+            }
+        
+            if (isset(Auth::user()->siswa))
+            {
+                return redirect(RouteServiceProvider::HOME);
+            }   
+            
         }
 
         return $next($request);

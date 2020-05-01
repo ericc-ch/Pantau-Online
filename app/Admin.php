@@ -10,5 +10,10 @@ class Admin extends Akun
 
     protected $guard = 'admin';
 
-    protected $fillable = ['nama', 'username', 'password'];
+    protected $fillable = ['nama', 'id_akun'];
+
+    public function akun()
+    {
+        return $this->hasOne('App\User', 'id_akun');
+    }
 }

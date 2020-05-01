@@ -15,7 +15,7 @@
                             <label for="nip" class="col-md-4 col-form-label text-md-right">{{ __('NIP Anda') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nip" type="number" class="form-control @error('nip') is-invalid @enderror" name="nip" value="{{ old('nip') }}" required autocomplete="nip">
+                                <input id="nip" type="number" class="form-control @error('nip') is-invalid @enderror" name="nip" value="{{ old('nip') }}" required autocomplete="nip" autofocus>
 
                                 @error('nip')
                                     <span class="invalid-feedback" role="alert">
@@ -29,7 +29,7 @@
                             <label for="nama" class="col-md-4 col-form-label text-md-right">{{ __('Nama lengkap') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nama" type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}" required autocomplete="nama" autofocus>
+                                <input id="nama" type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}" required autocomplete="nama">
 
                                 @error('nama')
                                     <span class="invalid-feedback" role="alert">
