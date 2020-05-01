@@ -32,6 +32,7 @@
     <!-- ./wrapper -->
 
    @include('layouts.admin.script')
+   @yield('js')
 </body>
 
 </html>
