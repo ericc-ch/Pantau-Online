@@ -9,6 +9,8 @@ class Ortu extends Model
     protected $table = 'ortu';
 
     // protected $guard = 'ortu';
+    
+    protected $primaryKey = 'nik';
 
     protected $fillable = [
         'nik',

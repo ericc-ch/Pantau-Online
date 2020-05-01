@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\User;
+use Illuminate\Support\Facades\DB;
 
 class SiswaSeeder extends Seeder
 {
@@ -12,14 +12,10 @@ class SiswaSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
-            'nis' => 11806623,
-            'nama' => 'Agung Prasetio',
-            'jk' => 'L',
-            'rombel'=> 'RPL XI-3',
-            'rayon' => 'Ciawi 4',
-            'username' => 'agungp',
-            'password' => bcrypt('agungp123'),
-        ]);
+        DB::insert("INSERT INTO `siswas` (`nis`, `nama`, `jk`, `rombel`, `rayon`, `id_akun`) VALUES
+            (11806764, 'Muhammad Ramdhani', 'L', 'RPL XI-3', 'Ciawi 3', 1),
+            (11806479, 'Agung Prasetio', 'L', 'RPL XI-3', 'Sukasari 2', 2),
+            (11806666, 'Eric Christian', 'L', 'RPL XI-1', 'Cicurug 2', 3);
+        ");
     }
 }
