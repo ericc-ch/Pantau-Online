@@ -1,13 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-
-use App\Detailjadwal;
+use App\Guru;
 use Illuminate\Http\Request;
 
-class PembuktianController extends Controller
+class AdminGuruController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,15 +13,9 @@ class PembuktianController extends Controller
      */
     public function index()
     {
-        $nis = Auth::user()->siswa->nis;
-        $id = $nis. date('dmy');
-        settype($id,"integer");
+        $gurus = Guru::with('mapel')->get();
 
-        $detailjadwal = Detailjadwal::with('mapel')->with('activity')
-        ->where('id_jadwal','=', $id)
-        ->get();
-
-        return view('murid.pembuktian', compact('detailjadwal'));
+        return view('admin.guru.index', compact('gurus'));
     }
 
     /**
@@ -45,24 +36,7 @@ class PembuktianController extends Controller
      */
     public function store(Request $request)
     {
-        $nama_aktifitas = $request->get('aktifitas');
-        $nama_mapel = $request->get('mapel');
-        $rombel = Auth::user()->siswa->rombel;
-        //nama file bukti
-        $nama_bukti = Auth::user()->siswa->nama.' '.$nama_aktifitas.'.'.$request->bukti->extension();
-        $new_bukti = new \App\Pembuktian;
-        $new_bukti->id_jadwal = $request->get('id_jadwal');
-        $new_bukti->id_aktifitas = $request->get('id_aktifitas');
-        $new_bukti->tanggal_mengumpulkan = date('ymd');
-        if($request->file('bukti')){
-             $new_bukti->bukti = $nama_bukti;
-             $request->file('bukti')->move(public_path('bukti/'.$rombel.'/'.$nama_mapel.'/'), $nama_bukti );
-        }
-        $new_bukti->save();
-        return redirect()->route('pembuktian.index');
-
-        
-
+        //
     }
 
     /**

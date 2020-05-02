@@ -23,6 +23,7 @@ class Siswa extends Model
         'rombel',
         'rayon', 'id_akun'
     ];
+    protected $primaryKey = 'nis';
 
     /**
      * The attributes that should be hidden for arrays.

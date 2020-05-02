@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Siswa;
 use Illuminate\Http\Request;
 
 class AdminSiswaController extends Controller
@@ -48,9 +48,9 @@ class AdminSiswaController extends Controller
         $rombels = $this->rombel();
         $rayons = $this->rayon();
 
-        $users = User::orderBy('nama', 'ASC')->get();
+        $siswas = Siswa::orderBy('nama', 'ASC')->get();
 
-        return view('admin.siswa.index', compact('users', 'rombels', 'rayons'));
+        return view('admin.siswa.index', compact('siswas', 'rombels', 'rayons'));
     }
 
     /**
