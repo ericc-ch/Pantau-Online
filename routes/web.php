@@ -24,6 +24,8 @@ Route::group(['prefix' => 'guru'], function() {
     Route::get('/dashboard', function() {
         return view('guru.index');
     })->name('guru.dashboard');
+
+    Route::get('/laporan-siswa', 'GuruLaporanKegiatanController@index')->name('guru.laporansiswa');
 });
 
 Route::group(['prefix' => 'ortu'], function() {
