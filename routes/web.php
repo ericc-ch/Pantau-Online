@@ -36,10 +36,11 @@ Route::group(['prefix' => 'ortu'], function() {
 
 Route::group(['prefix'=>'murid'], function (){
     Route::get('/','MuridController@index')->name('murid.index');
-    Route::get('/data-diri','MuridController@edit')->name('murid.edit');
-    Route::put('/data-diri','MuridController@update')->name('murid.update');
     Route::get('/jadwal', 'JadwalController@index')->name('jadwal.index');
     Route::post('/jadwal', 'JadwalController@store')->name('jadwal.store');
+    Route::get('/pembuktian','PembuktianController@index')->name('pembuktian.index');
+    Route::post('/pembuktian','PembuktianController@store')->name('pembuktian.store');
+    
 });
 
 
