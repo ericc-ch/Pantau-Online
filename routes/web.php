@@ -21,7 +21,7 @@ Route::group(['prefix' => 'guru'], function() {
     Route::post('/register', 'GuruAuth\RegisterController@register')->name('guru.register.submit');
     Route::get('/dashboard', function() {
         return view('guru.index');
-    })->name('guru.dashboard');
+    })->name('guru.dashboard')->middleware('cekuser:guru');
 });
 
 Route::group(['prefix' => 'ortu'], function() {
@@ -29,7 +29,7 @@ Route::group(['prefix' => 'ortu'], function() {
     Route::post('/register', 'OrtuAuth\RegisterController@register')->name('ortu.register.submit');
     Route::get('/dashboard', function() {
         return view('ortu.index');
-    })->name('ortu.dashboard');
+    })->name('ortu.dashboard')->middleware('cekuser:ortu');
 });
 
 Route::group(['prefix'=>'murid'], function (){
@@ -40,7 +40,6 @@ Route::group(['prefix'=>'murid'], function (){
     Route::post('/pembuktian','PembuktianController@store')->name('pembuktian.store');
     
 });
-
 
 Auth::routes();
 
