@@ -34,6 +34,13 @@
                     <form method="post" class="form-data" id="form-data" action="{{route('jadwal.store')}}">
                         @csrf
                         <div class="row">
+                            <div class="col-lg-12">
+                            <label>Tanggal</label>
+                                <input type="date" name="tanggal" id="tanggal" class="form-control"
+                                    required="true">
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Jam Mulai</label>
