@@ -12,8 +12,6 @@
 */
 
 Route::group(['prefix' => 'admin'], function() {
-    Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('admin.login');
-    Route::post('/login', 'AdminAuth\LoginController@login')->name('admin.login.submit');
     Route::get('/dashboard', 'AdminSiswaController@dashboard')->name('admin.dashboard');
     Route::get('/siswa', 'AdminSiswaController@index')->name('admin.siswa.index');
 });
