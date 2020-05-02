@@ -8,6 +8,7 @@ use App\Mapel;
 use Illuminate\Support\Facades\DB;
 use App\Detailjadwal;
 use App\Aktifitas;
+use App\Jadwalkegiatan;
 
 class JadwalController extends Controller
 {
@@ -18,7 +19,7 @@ class JadwalController extends Controller
      */
     public function index(Request $request)
     {
-        $nis = Auth::user()->nis;
+        $nis = Auth::user()->siswa->nis;
         $id = $nis. date('dmy');
         settype($id,"integer");
 
@@ -49,6 +50,20 @@ class JadwalController extends Controller
      */
     public function store(Request $request)
     {
+        //id
+        $nis = Auth::user()->siswa->nis;
+        $id = $nis. date('dmy');
+        //cek db
+        $jadwalKegiatan = DB::table('jadwal_kegiatan')
+            ->where('tanggal','=', date('dmy'))
+            ->get();
+        if (count($jadwalKegiatan) < 1) {
+            Jadwalkegiatan::create([
+                'id_jadwal' => $id,
+                'nis' => $nis,
+                'tanggal' => date('dmy')
+            ]);
+        }
         $detailJadwal = Detailjadwal::create($request->all());
         return redirect()->route('jadwal.index');
     }
