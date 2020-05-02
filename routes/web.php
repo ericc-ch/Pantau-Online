@@ -14,6 +14,8 @@
 Route::group(['prefix' => 'admin'], function() {
     Route::get('/dashboard', 'AdminSiswaController@dashboard')->name('admin.dashboard');
     Route::get('/siswa', 'AdminSiswaController@index')->name('admin.siswa.index');
+    Route::get('/guru', 'AdminGuruController@index')->name('admin.guru.index');
+    Route::get('/ortu', 'AdminOrtuController@index')->name('admin.ortu.index');
 
     //crud mapel
     Route::get('/mapel', 'MapelController@index')->name('admin.mapel.index');

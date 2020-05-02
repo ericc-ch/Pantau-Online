@@ -30,6 +30,22 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('admin.guru.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Data Guru
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.ortu.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Data Orang Tua Siswa
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('admin.mapel.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
