@@ -18,7 +18,7 @@
         <!-- Main content -->
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Data siswa</h3>
+                <h3 class="card-title">Data orang tua siswa</h3>
             </div>
             <div class="card-body">
                 <table id="table" class="table table-bordered">
@@ -26,19 +26,18 @@
                         <tr>
                             <th style="width: 5%">No</th>
                             <th>Nama</th>
-                            <th>NIS</th>
-                            <th>Rombel</th>
-                            <th>Rayon</th>
+                            <th>NIK</th>
+                            <th>Nama Anak</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach( $siswas as $siswa )
+                        @foreach( $ortus as $ortu )
+                        
                         <tr>
                             <td align="center">{{ $loop->iteration }}</td>
-                            <td>{{ $siswa->nama }}</td>
-                            <td>{{ $siswa->nis }}</td>
-                            <td>{{ $siswa->rombel }}</td>
-                            <td>{{ $siswa->rayon }}</td>
+                            <td>{{ $ortu->nama }}</td>
+                            <td>{{ $ortu->nik }}</td>
+                            <td>{{ $ortu->siswa->nama }}</td>
                         </tr>
                         @endforeach
                     </tbody>

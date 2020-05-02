@@ -14,6 +14,22 @@
 Route::group(['prefix' => 'admin'], function() {
     Route::get('/dashboard', 'AdminSiswaController@dashboard')->name('admin.dashboard');
     Route::get('/siswa', 'AdminSiswaController@index')->name('admin.siswa.index');
+    Route::get('/guru', 'AdminGuruController@index')->name('admin.guru.index');
+    Route::get('/ortu', 'AdminOrtuController@index')->name('admin.ortu.index');
+
+    //crud mapel
+    Route::get('/mapel', 'MapelController@index')->name('admin.mapel.index');
+    Route::post('/mapel', 'MapelController@store')->name('admin.mapel.store');
+    Route::get('/mapel/{id_jadwal}', 'MapelController@edit')->name('admin.mapel.edit');
+    Route::patch('/mapel/{id_jadwal}', 'MapelController@update')->name('admin.mapel.update');
+    Route::delete('/mapel/{id_jadwal}', 'MapelController@destroy')->name('admin.mapel.destroy');
+
+    //crud aktifitas
+    Route::get('/aktifitas', 'AktifitasController@index')->name('admin.aktifitas.index');
+    Route::post('/aktifitas', 'AktifitasController@store')->name('admin.aktifitas.store');
+    Route::get('/aktifitas/{id_aktifitas}', 'AktifitasController@edit')->name('admin.aktifitas.edit');
+    Route::patch('/aktifitas/{id_aktifitas}', 'AktifitasController@update')->name('admin.aktifitas.update');
+    Route::delete('/aktifitas/{id_aktifitas}', 'AktifitasController@destroy')->name('admin.aktifitas.destroy');
 });
 
 Route::group(['prefix' => 'guru'], function() {
@@ -21,7 +37,7 @@ Route::group(['prefix' => 'guru'], function() {
     Route::post('/register', 'GuruAuth\RegisterController@register')->name('guru.register.submit');
     Route::get('/dashboard', function() {
         return view('guru.index');
-    })->name('guru.dashboard');
+    })->name('guru.dashboard')->middleware('cekuser:guru');
 
     Route::get('/siswa/rombel', 'GuruController@siswa_pj')->name('guru.siswa.pj');
     Route::get('/siswa/rayon', 'GuruController@siswa_ps')->name('guru.siswa.ps');
@@ -36,7 +52,7 @@ Route::group(['prefix' => 'ortu'], function() {
     Route::post('/register', 'OrtuAuth\RegisterController@register')->name('ortu.register.submit');
     Route::get('/dashboard', function() {
         return view('ortu.index');
-    })->name('ortu.dashboard');
+    })->name('ortu.dashboard')->middleware('cekuser:ortu');
 });
 
 Route::group(['prefix'=>'murid'], function (){
@@ -48,8 +64,6 @@ Route::group(['prefix'=>'murid'], function (){
     
 });
 
-
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->middleware('auth')->name('home');
-
+Route::get('/', function() { return redirect('login'); });
