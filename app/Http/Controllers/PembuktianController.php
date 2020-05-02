@@ -1,34 +1,29 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use App\Mapel;
 use Illuminate\Support\Facades\DB;
 use App\Detailjadwal;
-use App\Aktifitas;
+use Illuminate\Http\Request;
 
-class JadwalController extends Controller
+class PembuktianController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $nis = Auth::user()->nis;
         $id = $nis. date('dmy');
         settype($id,"integer");
 
         $detailjadwal = Detailjadwal::with('mapel')->with('activity')
-            ->where('id_jadwal','=', $id)
-            ->get();
-        $mapel = Mapel::all();
-        $aktifitas = Aktifitas::all();
+        ->where('id_jadwal','=', $id)
+        ->get();
 
-        return view('murid.setjadwal', compact('detailjadwal', 'id','mapel','aktifitas'));
+        return view('murid.pembuktian', compact('detailjadwal'));
     }
 
     /**
@@ -49,8 +44,24 @@ class JadwalController extends Controller
      */
     public function store(Request $request)
     {
-        $detailJadwal = Detailjadwal::create($request->all());
-        return redirect()->route('jadwal.index');
+        $nama_aktifitas = $request->get('aktifitas');
+        $nama_mapel = $request->get('mapel');
+        $rombel = Auth::user()->rombel;
+        //nama file bukti
+        $nama_bukti = Auth::user()->nama.' '.$nama_aktifitas.'.'.$request->bukti->extension();
+        $new_bukti = new \App\Pembuktian;
+        $new_bukti->id_jadwal = $request->get('id_jadwal');
+        $new_bukti->id_aktifitas = $request->get('id_aktifitas');
+        $new_bukti->tanggal_mengumpulkan = date('ymd');
+        if($request->file('bukti')){
+             $new_bukti->bukti = $nama_bukti;
+             $request->file('bukti')->move(public_path('bukti/'.$rombel.'/'.$nama_mapel.'/'), $nama_bukti );
+        }
+        $new_bukti->save();
+        return redirect()->route('pembuktian.index');
+
+        
+
     }
 
     /**

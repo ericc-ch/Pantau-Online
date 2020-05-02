@@ -66,8 +66,9 @@
                                     <label>Mata pelajaran</label>
                                     <select name="id_mapel" id="id_mapel" class="form-control" required="true">
                                         <option value=""></option>
-                                        <option value="1">Sistem Informasi</option>
-                                        <option value="2">Teknik Informatika</option>
+                                        @foreach($mapel as $pel)
+                                        <option value="{{$pel->id_mapel}}">{{$pel->nama_mapel}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -75,8 +76,12 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Aktifitas</label>
-                                    <input type="text" name="aktifitas" id="aktifitas" class="form-control"
-                                        required="true">
+                                    <select name="id_aktifitas" id="id_aktifitas" class="form-control" required="true">
+                                        <option value=""></option>
+                                        @foreach($aktifitas as $aktif)
+                                        <option value="{{$aktif->id_mapel}}">{{$aktif->nama_mapel}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -106,7 +111,7 @@
                                                     <th>Jam Mulai</th>
                                                     <th>Jam Akhir</th>
                                                     <th>Id Aktifitas</th>
-                                                    <th>Id Mapel</th>
+                                                    <th>Mapel</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -116,8 +121,8 @@
                                                     <td>{{$data->id_jadwal}}</td>
                                                     <td>{{$data->jam_mulai}}</td>
                                                     <td>{{$data->jam_akhir}}</td>
-                                                    <td>{{$data->id_aktifitas}}</td>
-                                                    <td>{{$data->id_mapel}}</td>
+                                                    <td>{{$data->activity->nama_aktifitas}}</td>
+                                                    <td>{{$data->mapel->nama_mapel}}</td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>

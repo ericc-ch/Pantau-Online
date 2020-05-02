@@ -28,7 +28,7 @@ class Detailjadwal extends Model
     // NERIMA DARI MAPEL
     public function mapel()
     {
-        $this->belongsTo('App\Mapel', 'id_mapel');
+        return $this->belongsTo('App\Mapel', 'id_mapel');
     }
 
 
@@ -40,7 +40,7 @@ class Detailjadwal extends Model
     }
 
     // NGIRIM KE PEMBUKTIAN
-    public function aktifitaz()
+    public function aktifitas()
     {
         return $this->hasMany('App\Pembuktian', 'id_aktifitas');
     }
