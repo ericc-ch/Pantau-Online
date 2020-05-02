@@ -23,7 +23,12 @@ Route::group(['prefix' => 'guru'], function() {
         return view('guru.index');
     })->name('guru.dashboard');
 
-    Route::get('/laporan-siswa', 'GuruLaporanKegiatanController@index')->name('guru.laporansiswa');
+    Route::get('/siswa/rombel', 'GuruController@siswa_pj')->name('guru.siswa.pj');
+    Route::get('/siswa/rayon', 'GuruController@siswa_ps')->name('guru.siswa.ps');
+    Route::get('/laporan/rombel', 'GuruController@laporan_siswa')->name('guru.laporansiswa');
+    Route::get('/laporan/rombel/{nis}', 'GuruController@laporan_siswa_detail')->name('guru.laporansiswa.detail');
+    Route::get('/laporan/rayon', 'GuruController@laporan_siswa_rayon')->name('guru.laporansiswa.rayon');
+    Route::get('/laporan/rayon/{nis}', 'GuruController@laporan_siswa_rayon_detail')->name('guru.laporansiswa.rayon.detail');
 });
 
 Route::group(['prefix' => 'ortu'], function() {
@@ -46,5 +51,5 @@ Route::group(['prefix'=>'murid'], function (){
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->middleware('auth')->name('home');
 
