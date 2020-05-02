@@ -14,6 +14,20 @@
 Route::group(['prefix' => 'admin'], function() {
     Route::get('/dashboard', 'AdminSiswaController@dashboard')->name('admin.dashboard');
     Route::get('/siswa', 'AdminSiswaController@index')->name('admin.siswa.index');
+
+    //crud mapel
+    Route::get('/mapel', 'MapelController@index')->name('admin.mapel.index');
+    Route::post('/mapel', 'MapelController@store')->name('admin.mapel.store');
+    Route::get('/mapel/{id_jadwal}', 'MapelController@edit')->name('admin.mapel.edit');
+    Route::patch('/mapel/{id_jadwal}', 'MapelController@update')->name('admin.mapel.update');
+    Route::delete('/mapel/{id_jadwal}', 'MapelController@destroy')->name('admin.mapel.destroy');
+
+    //crud aktifitas
+    Route::get('/aktifitas', 'AktifitasController@index')->name('admin.aktifitas.index');
+    Route::post('/aktifitas', 'AktifitasController@store')->name('admin.aktifitas.store');
+    Route::get('/aktifitas/{id_aktifitas}', 'AktifitasController@edit')->name('admin.aktifitas.edit');
+    Route::patch('/aktifitas/{id_aktifitas}', 'AktifitasController@update')->name('admin.aktifitas.update');
+    Route::delete('/aktifitas/{id_aktifitas}', 'AktifitasController@destroy')->name('admin.aktifitas.destroy');
 });
 
 Route::group(['prefix' => 'guru'], function() {

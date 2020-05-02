@@ -13,8 +13,8 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                <li class="nav-item has-treeview menu-open">
-                    <a href="/peserta" class="nav-link active">
+                <li class="nav-item">
+                    <a href="/peserta" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -26,6 +26,22 @@
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Data Siswa
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.mapel.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Data Mata Pelajaran
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.aktifitas.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Data Aktifitas
                         </p>
                     </a>
                 </li>
