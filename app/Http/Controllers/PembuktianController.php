@@ -15,7 +15,7 @@ class PembuktianController extends Controller
      */
     public function index()
     {
-        $nis = Auth::user()->nis;
+        $nis = Auth::user()->siswa->nis;
         $id = $nis. date('dmy');
         settype($id,"integer");
 
@@ -46,9 +46,9 @@ class PembuktianController extends Controller
     {
         $nama_aktifitas = $request->get('aktifitas');
         $nama_mapel = $request->get('mapel');
-        $rombel = Auth::user()->rombel;
+        $rombel = Auth::user()->siswa->rombel;
         //nama file bukti
-        $nama_bukti = Auth::user()->nama.' '.$nama_aktifitas.'.'.$request->bukti->extension();
+        $nama_bukti = Auth::user()->siswa->nama.' '.$nama_aktifitas.'.'.$request->bukti->extension();
         $new_bukti = new \App\Pembuktian;
         $new_bukti->id_jadwal = $request->get('id_jadwal');
         $new_bukti->id_aktifitas = $request->get('id_aktifitas');
