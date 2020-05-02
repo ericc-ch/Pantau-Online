@@ -13,8 +13,8 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                <li class="nav-item has-treeview menu-open">
-                    <a href="/murid" class="nav-link active">
+                <li class="nav-item">
+                    <a href="/murid" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -22,18 +22,18 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/murid/data-diri" class="nav-link">
+                    <a href="/murid/jadwal" class="nav-link">
                         <i class="nav-icon fas fa-edit"></i>
                         <p>
-                            Ubah data Diri
+                            Set Jadwal
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/murid/jadwal" class="nav-link">
+                    <a href="/murid/pembuktian" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
                         <p>
-                            Set Jadwal
+                            Pembuktian
                         </p>
                     </a>
                 </li>

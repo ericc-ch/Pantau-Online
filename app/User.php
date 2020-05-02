@@ -42,6 +42,6 @@ class User extends Authenticatable
     }
     public function admin()
     {
-        return $this->belongsTo('App\Ortu', 'id_pemilik');
+        return $this->belongsTo('App\Admin', 'id_pemilik');
     }
 }

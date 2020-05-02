@@ -12,8 +12,6 @@
 */
 
 Route::group(['prefix' => 'admin'], function() {
-    Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('admin.login');
-    Route::post('/login', 'AdminAuth\LoginController@login')->name('admin.login.submit');
     Route::get('/dashboard', 'AdminSiswaController@dashboard')->name('admin.dashboard');
     Route::get('/siswa', 'AdminSiswaController@index')->name('admin.siswa.index');
 });
@@ -38,10 +36,11 @@ Route::group(['prefix' => 'ortu'], function() {
 
 Route::group(['prefix'=>'murid'], function (){
     Route::get('/','MuridController@index')->name('murid.index');
-    Route::get('/data-diri','MuridController@edit')->name('murid.edit');
-    Route::put('/data-diri','MuridController@update')->name('murid.update');
     Route::get('/jadwal', 'JadwalController@index')->name('jadwal.index');
     Route::post('/jadwal', 'JadwalController@store')->name('jadwal.store');
+    Route::get('/pembuktian','PembuktianController@index')->name('pembuktian.index');
+    Route::post('/pembuktian','PembuktianController@store')->name('pembuktian.store');
+    
 });
 
 

@@ -34,15 +34,7 @@
                     <form method="post" class="form-data" id="form-data" action="{{route('jadwal.store')}}">
                         @csrf
                         <div class="row">
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label>Id Jadwal</label>
-                                    <input type="text" name="id_jadwal" id="id_jadwal" class="form-control"
-                                        required="true" value="{{$id}}">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Jam Mulai</label>
                                     <input type="time" name="jam_mulai" id="jam_mulai" class="form-control"
@@ -50,11 +42,13 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Jam Akhir</label>
                                     <input type="time" name="jam_akhir" id="jam_akhir" class="form-control"
                                         required="true">
+                                    <input type="hidden" name="id_jadwal" id="id_jadwal"
+                                        required="true" value="{{$id}}">
                                 </div>
                             </div>
 
@@ -66,8 +60,9 @@
                                     <label>Mata pelajaran</label>
                                     <select name="id_mapel" id="id_mapel" class="form-control" required="true">
                                         <option value=""></option>
-                                        <option value="1">Sistem Informasi</option>
-                                        <option value="2">Teknik Informatika</option>
+                                        @foreach($mapel as $pel)
+                                        <option value="{{$pel->id_mapel}}">{{$pel->nama_mapel}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -75,8 +70,12 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Aktifitas</label>
-                                    <input type="text" name="aktifitas" id="aktifitas" class="form-control"
-                                        required="true">
+                                    <select name="id_aktifitas" id="id_aktifitas" class="form-control" required="true">
+                                        <option value=""></option>
+                                        @foreach($aktifitas as $aktif)
+                                        <option value="{{$aktif->id_aktifitas}}">{{$aktif->nama_aktifitas}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -102,22 +101,20 @@
                                             <thead>
                                                 <tr>
                                                     <th>Nomor</th>
-                                                    <th>Id Jadwal</th>
                                                     <th>Jam Mulai</th>
                                                     <th>Jam Akhir</th>
-                                                    <th>Id Aktifitas</th>
-                                                    <th>Id Mapel</th>
+                                                    <th>Aktifitas</th>
+                                                    <th>Mapel</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach($detailjadwal as $data)
                                                 <tr>
                                                     <td>{{$loop->iteration}}</td>
-                                                    <td>{{$data->id_jadwal}}</td>
                                                     <td>{{$data->jam_mulai}}</td>
                                                     <td>{{$data->jam_akhir}}</td>
-                                                    <td>{{$data->id_aktifitas}}</td>
-                                                    <td>{{$data->id_mapel}}</td>
+                                                    <td>{{$data->activity->nama_aktifitas}}</td>
+                                                    <td>{{$data->mapel->nama_mapel}}</td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>
