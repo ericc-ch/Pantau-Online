@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class AdminSiswaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('cekuser:admin');   
+    }
+
     public function dashboard()
     {
         return view('admin.index');
