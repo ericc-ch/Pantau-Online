@@ -50,6 +50,10 @@ Route::group(['prefix' => 'guru'], function() {
 Route::group(['prefix' => 'ortu'], function() {
     Route::get('/register', 'OrtuAuth\RegisterController@showRegistrationForm')->name('ortu.register');
     Route::post('/register', 'OrtuAuth\RegisterController@register')->name('ortu.register.submit');
+    Route::get('/kegiatan-anak', 'OrtuController@kegiatanAnak')->name('ortu.kegiatan-anak');
+    Route::patch('/kegiatan-anak/{id_jadwa}', 'OrtuController@update')->name('ortu.update');
+    Route::post('/kegiatan-anak/cari', 'OrtuController@alihkan')->name('ortu.alihkan');
+    Route::get('/kegiatan-anak/cari/{tgl}', 'OrtuController@cari')->name('ortu.cari');
     Route::get('/dashboard', function() {
         return view('ortu.index');
     })->name('ortu.dashboard')->middleware('cekuser:ortu');
@@ -60,7 +64,10 @@ Route::group(['prefix'=>'murid'], function (){
     Route::get('/jadwal', 'JadwalController@index')->name('jadwal.index');
     Route::post('/jadwal', 'JadwalController@store')->name('jadwal.store');
     Route::get('/pembuktian','PembuktianController@index')->name('pembuktian.index');
-    Route::post('/pembuktian','PembuktianController@store')->name('pembuktian.store');
+    Route::patch('/pembuktian/{id_jadwal}','PembuktianController@update')->name('pembuktian.update');
+    Route::get('/pembuktian/{id_jadwal}','PembuktianController@edit')->name('pembuktian.edit');
+    Route::post('/pembuktian/cari','PembuktianController@alihkan')->name('pembuktian.alihkan');
+    Route::get('/pembuktian/cari/{tgl}','PembuktianController@cari')->name('pembuktian.cari');
     
 });
 

@@ -54,8 +54,6 @@
                                     <label>Jam Akhir</label>
                                     <input type="time" name="jam_akhir" id="jam_akhir" class="form-control"
                                         required="true">
-                                    <input type="hidden" name="id_jadwal" id="id_jadwal"
-                                        required="true" value="{{$id}}">
                                 </div>
                             </div>
 
@@ -99,7 +97,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Jadwal</h3>
+                                    <h3 class="card-title">Jadwal Hari Ini</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="row">
@@ -108,19 +106,17 @@
                                             <thead>
                                                 <tr>
                                                     <th>Nomor</th>
-                                                    <th>Jam Mulai</th>
-                                                    <th>Jam Akhir</th>
+                                                    <th>Waktu</th>
                                                     <th>Aktifitas</th>
                                                     <th>Mapel</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($detailjadwal as $data)
+                                                @foreach($jadwal as $data)
                                                 <tr>
                                                     <td>{{$loop->iteration}}</td>
-                                                    <td>{{$data->jam_mulai}}</td>
-                                                    <td>{{$data->jam_akhir}}</td>
-                                                    <td>{{$data->activity->nama_aktifitas}}</td>
+                                                    <td>{{$data->jam_mulai}} - {{$data->jam_akhir}} </td>
+                                                    <td>{{$data->aktifitas->nama_aktifitas}}</td>
                                                     <td>{{$data->mapel->nama_mapel}}</td>
                                                 </tr>
                                                 @endforeach
