@@ -54,6 +54,10 @@ class Siswa extends Model
     {
         return $this->hasMany('App\Jadwalkegiatan', 'nis');
     }
+    public function jadwal()
+    {
+        return $this->hasMany('App\Jadwal', 'nis');
+    }
     public function akun()
     {
         return $this->hasOne('App\User', 'id_akun');

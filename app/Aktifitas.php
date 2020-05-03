@@ -16,4 +16,8 @@ class Aktifitas extends Model
     {
         return $this->haMany('App\Detailjadwal', 'id_aktifitas');
     }
+    public function jadwal()
+    {
+        return $this->haMany('App\Jadwal', 'id_aktifitas');
+    }
 }
