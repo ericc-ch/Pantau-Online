@@ -68,7 +68,6 @@ Route::group(['prefix'=>'murid'], function (){
     Route::get('/pembuktian/{id_jadwal}','PembuktianController@edit')->name('pembuktian.edit');
     Route::post('/pembuktian/cari','PembuktianController@alihkan')->name('pembuktian.alihkan');
     Route::get('/pembuktian/cari/{tgl}','PembuktianController@cari')->name('pembuktian.cari');
-    
 });
 
 Auth::routes();

@@ -6,10 +6,15 @@ use Illuminate\Http\Request;
 use App\Guru;
 use App\Siswa;
 use App\Jadwal;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class GuruController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('cekuser:guru');
+    }
+
     public function siswa_pj()
     {
         $pj = Auth::user()->guru->pj;

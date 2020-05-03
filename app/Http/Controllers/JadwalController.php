@@ -11,6 +11,10 @@ use App\Jadwal;
 
 class JadwalController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('cekuser');
+    }
     /**
      * Display a listing of the resource.
      *

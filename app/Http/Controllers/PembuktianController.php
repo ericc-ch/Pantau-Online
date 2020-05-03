@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class PembuktianController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('cekuser');
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -31,15 +31,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach( $ortus as $ortu )
-                        
+                        @forelse( $ortus as $ortu )
                         <tr>
                             <td align="center">{{ $loop->iteration }}</td>
                             <td>{{ $ortu->nama }}</td>
                             <td>{{ $ortu->nik }}</td>
                             <td>{{ $ortu->siswa->nama }}</td>
                         </tr>
-                        @endforeach
+                        @empty
+                            <p>No Data</p>
+                        @endforelse
                     </tbody>
                 </table>
 

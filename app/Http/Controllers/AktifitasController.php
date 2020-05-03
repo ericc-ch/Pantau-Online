@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class AktifitasController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('cekuser:admin');
+    }
+
     /**
      * Display a listing of the resource.
      *

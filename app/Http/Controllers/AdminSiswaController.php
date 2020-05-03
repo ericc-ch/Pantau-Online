@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Siswa;
 use Illuminate\Http\Request;
+use App\User;
 
 class AdminSiswaController extends Controller
 {
