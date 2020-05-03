@@ -33,8 +33,6 @@ Route::group(['prefix' => 'admin'], function() {
 });
 
 Route::group(['prefix' => 'guru'], function() {
-    Route::get('/register', 'GuruAuth\RegisterController@showRegistrationForm')->name('guru.register');
-    Route::post('/register', 'GuruAuth\RegisterController@register')->name('guru.register.submit');
     Route::get('/dashboard', function() {
         return view('guru.index');
     })->name('guru.dashboard')->middleware('cekuser:guru');

@@ -65,7 +65,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'nik' => ['required', 'integer', 'unique:ortu'],
             'nama' => ['required', 'string', 'max:255'],
-            'nis' => ['required', 'integer', 'min:8'],
+            'nis' => ['required', 'integer', 'min:8', 'exists:siswas'],
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
