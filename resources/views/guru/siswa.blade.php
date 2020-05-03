@@ -27,6 +27,8 @@
                           <th>No</th>
                           <th>NIS</th>
                           <th>Nama</th>
+                          <th>Rombel</th>
+                          <th>Rayon</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -35,6 +37,8 @@
                           <td>{{ $loop->iteration }}</td>
                           <td>{{ $siswa->nis }}</td>
                           <td>{{ $siswa->nama }}</td>
+                          <td>{{ $siswa->rombel }}</td>
+                          <td>{{ $siswa->rayon }}</td>
                       </tr>
                       @endforeach
                   </tbody>
