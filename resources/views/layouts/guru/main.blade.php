@@ -32,6 +32,8 @@
     <!-- ./wrapper -->
 
    @include('layouts.guru.script')
+
+   @yield('js')
 </body>
 
 </html>

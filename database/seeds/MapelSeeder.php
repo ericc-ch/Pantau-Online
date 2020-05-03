@@ -13,7 +13,8 @@ class MapelSeeder extends Seeder
     public function run()
     {
         DB::insert("INSERT INTO `mapel` (`id_mapel`, `nama_mapel`) VALUES
-            (1, 'PAI');
+            (1, 'PAI'),
+            (2, 'PPKN');
         ");
     }
 }
