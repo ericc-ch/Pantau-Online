@@ -2,25 +2,25 @@
 <html>
 
 <head>
-   @include('layouts.guru.head')
+   @include('layouts.ortu.head')
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
         <!-- Navbar -->
-        @include('layouts.guru.header')
+        @include('layouts.ortu.header')
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-       @include('layouts.guru.sidebar')
+       @include('layouts.ortu.sidebar')
 
         <!-- Content Wrapper. Contains page content -->
         @yield('content')
         <!-- /.content-wrapper -->
 
         <!-- footer -->
-       @include('layouts.guru.footer')
+       @include('layouts.ortu.footer')
         <!-- end footer -->
 
         <!-- Control Sidebar -->
@@ -31,7 +31,7 @@
     </div>
     <!-- ./wrapper -->
 
-   @include('layouts.guru.script')
+   @include('layouts.ortu.script')
 </body>
 
 </html>

@@ -20,4 +20,9 @@ class Mapel extends Model
     {
         return $this->hasMany('App\Detailjadwal', 'id_mapel');
     }
+
+    public function jadwal()
+    {
+        return $this->hasMany('App\Jadwal', 'id_mapel');
+    }
 }
