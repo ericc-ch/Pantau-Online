@@ -26,52 +26,69 @@
         <div class="container-fluid">
             <div class="card card-default">
                 <div class="card-header">
-                    <h3 class="card-title">Jadwal </h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3 class="card-title">Jadwal </h3>
+                        </div>
+                        <div class="col-md-6">
+                            <form action="{{route('pembuktian.alihkan')}}" class="form-data" method="post">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-sm-10">
+                                        <input type="date" name="tanggal" id="tanggal" class="form-control float-lg-right"
+                                            required="true">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button type="submit" id="simpan" class="btn btn-primary float-lg-right">
+                                            <i class="fa fa-seacrh"></i> cari
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
 
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
-                                <div class="row">
-                                    <div class="col-sm-12 table-responsive">
-                                        <table class="table table hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Nomor</th>
-                                                    <th>Jam Mulai</th>
-                                                    <th>Jam Akhir</th>
-                                                    <th>Aktifitas</th>
-                                                    <th>Mapel</th>
-                                                    <th>Bukti</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach($detailjadwal as $data)
-                                                <tr>
-                                                    <td>{{$loop->iteration}}</td>
-                                                    <td>{{$data->jam_mulai}}</td>
-                                                    <td>{{$data->jam_akhir}}</td>
-                                                    <td>{{$data->activity->nama_aktifitas}}</td>
-                                                    <td>{{$data->mapel->nama_mapel}}</td>
-                                                    <td>
-                                                        <form method="POST" enctype="multipart/form-data" action="{{route('pembuktian.store')}}">
-                                                            @csrf
-                                                            <input type="file" name="bukti" required>
-                                                            <input type="hidden" name="id_aktifitas" value="{{$data->id_aktifitas}}">
-                                                            <input type="hidden" name="id_jadwal" value="{{$data->id_jadwal}}">
-                                                            <input type="hidden" name="mapel" value="{{$data->mapel->nama_mapel}}">
-                                                            <input type="hidden" name="aktifitas" value="{{$data->activity->nama_aktifitas}}">
-                                                            <button type="submit" class="btn btn-primary">Upload</button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
+                            <div class="row">
+                                <div class="col-sm-12 table-responsive">
+                                    <table class="table table hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Nomor</th>
+                                                <th>Waktu</th>
+                                                <th>Aktifitas</th>
+                                                <th>Mapel</th>
+                                                <th>Bukti</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($jadwal as $data)
+                                            <tr>
+                                                <td>{{$loop->iteration}}</td>
+                                                <td>{{$data->jam_mulai}} - {{$data->jam_akhir}}</td>
+                                                <td>{{$data->aktifitas->nama_aktifitas}}</td>
+                                                <td>{{$data->mapel->nama_mapel}}</td>
+                                                <td>
+                                                    <form method="POST" enctype="multipart/form-data"
+                                                        action="{{route('pembuktian.update', $data->id_jadwal)}}">
+                                                        @method('patch')
+                                                        @csrf
+                                                        <input type="file" name="bukti" required>
+                                                        <button type="submit" class="btn btn-primary">Upload</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card-body -->
                             <!-- /.card -->
                         </div>
                     </div>

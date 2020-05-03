@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2020 at 02:39 PM
--- Server version: 10.4.6-MariaDB
--- PHP Version: 7.3.8
+-- Generation Time: May 03, 2020 at 08:25 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `pantau`
+-- Database: `db_pantau`
 --
 
 -- --------------------------------------------------------
@@ -36,6 +35,13 @@ CREATE TABLE `admin` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `nama`, `id_akun`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 10, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -49,6 +55,13 @@ CREATE TABLE `aktifitas` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `aktifitas`
+--
+
+INSERT INTO `aktifitas` (`id_aktifitas`, `nama_aktifitas`, `created_at`, `updated_at`) VALUES
+(1, 'Ngaji', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -56,7 +69,7 @@ CREATE TABLE `aktifitas` (
 --
 
 CREATE TABLE `detail_jadwal` (
-  `id_jadwal` int(11) NOT NULL,
+  `id_jadwal` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `jam_mulai` time NOT NULL,
   `jam_akhir` time NOT NULL,
   `id_aktifitas` int(10) UNSIGNED NOT NULL,
@@ -64,6 +77,15 @@ CREATE TABLE `detail_jadwal` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `detail_jadwal`
+--
+
+INSERT INTO `detail_jadwal` (`id_jadwal`, `jam_mulai`, `jam_akhir`, `id_aktifitas`, `id_mapel`, `created_at`, `updated_at`) VALUES
+('125020520', '01:00:00', '01:00:00', 1, 1, '2020-05-02 00:41:54', '2020-05-02 00:41:54'),
+('125020520', '00:00:00', '01:01:00', 1, 1, '2020-05-02 01:09:09', '2020-05-02 01:09:09'),
+('125020520', '01:00:00', '01:00:00', 1, 1, '2020-05-02 01:09:32', '2020-05-02 01:09:32');
 
 -- --------------------------------------------------------
 
@@ -90,6 +112,8 @@ CREATE TABLE `guru` (
   `nip` int(11) NOT NULL,
   `nama` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_mapel` int(11) NOT NULL,
+  `pj` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ps` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_akun` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -99,8 +123,38 @@ CREATE TABLE `guru` (
 -- Dumping data for table `guru`
 --
 
-INSERT INTO `guru` (`nip`, `nama`, `id_mapel`, `id_akun`, `created_at`, `updated_at`) VALUES
-(190, 'erti', 1, 8, '2020-04-30 09:35:34', '2020-04-30 09:35:34');
+INSERT INTO `guru` (`nip`, `nama`, `id_mapel`, `pj`, `ps`, `id_akun`, `created_at`, `updated_at`) VALUES
+(190, 'Guru Ujang', 1, 'RPL XI-2', 'Cicurug 2', 8, '2020-04-30 09:35:34', '2020-04-30 09:35:34');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jadwal`
+--
+
+CREATE TABLE `jadwal` (
+  `id_jadwal` int(11) NOT NULL,
+  `nis` int(11) NOT NULL,
+  `tanggal` date NOT NULL,
+  `jam_mulai` time NOT NULL,
+  `jam_akhir` time NOT NULL,
+  `id_aktifitas` int(11) UNSIGNED NOT NULL,
+  `id_mapel` int(11) UNSIGNED NOT NULL,
+  `bukti` varchar(255) DEFAULT NULL,
+  `validasi` varchar(255) DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `jadwal`
+--
+
+INSERT INTO `jadwal` (`id_jadwal`, `nis`, `tanggal`, `jam_mulai`, `jam_akhir`, `id_aktifitas`, `id_mapel`, `bukti`, `validasi`, `updated_at`, `created_at`) VALUES
+(1, 11806479, '2020-05-05', '10:25:45', '10:25:45', 1, 1, 'blablablal.png', 'no', '2020-05-03 03:26:50', '2020-05-03 03:26:50'),
+(2, 125, '2020-05-05', '00:00:00', '00:00:00', 1, 1, NULL, NULL, '2020-05-02 21:48:47', '2020-05-02 21:48:47'),
+(3, 125, '2020-05-03', '01:00:00', '01:00:00', 1, 1, 'Demo Ngaji.jpeg', NULL, '2020-05-02 22:13:21', '2020-05-02 21:54:38'),
+(4, 125, '2020-05-04', '00:00:00', '01:00:00', 1, 1, NULL, NULL, '2020-05-02 21:55:38', '2020-05-02 21:55:38');
 
 -- --------------------------------------------------------
 
@@ -109,12 +163,19 @@ INSERT INTO `guru` (`nip`, `nama`, `id_mapel`, `id_akun`, `created_at`, `updated
 --
 
 CREATE TABLE `jadwal_kegiatan` (
-  `id_jadwal` int(11) NOT NULL,
+  `id_jadwal` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nis` int(10) UNSIGNED NOT NULL,
   `tanggal` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `jadwal_kegiatan`
+--
+
+INSERT INTO `jadwal_kegiatan` (`id_jadwal`, `nis`, `tanggal`, `created_at`, `updated_at`) VALUES
+('125020520', 125, '2002-05-20', '2020-05-02 01:09:09', '2020-05-02 01:09:09');
 
 -- --------------------------------------------------------
 
@@ -128,6 +189,13 @@ CREATE TABLE `mapel` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `mapel`
+--
+
+INSERT INTO `mapel` (`id_mapel`, `nama_mapel`, `created_at`, `updated_at`) VALUES
+(1, 'PAI', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -200,7 +268,7 @@ CREATE TABLE `password_resets` (
 --
 
 CREATE TABLE `pembuktian` (
-  `id_jadwal` int(10) UNSIGNED NOT NULL,
+  `id_jadwal` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_aktifitas` int(10) UNSIGNED NOT NULL,
   `tanggal_mengumpulkan` date NOT NULL,
   `bukti` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -259,7 +327,8 @@ INSERT INTO `users` (`id`, `username`, `password`, `id_pemilik`, `remember_token
 (6, 'kuntul', '$2y$10$qMtKc1WmFvCGW0LsFTc7leJ4WdKhXTH5e9gDpL1YygbFBJK5jk9EW', 12345, NULL, '2020-04-30 09:07:57', '2020-04-30 09:07:57'),
 (7, 'kintil', '$2y$10$qM5XwyCBFx7gyxLj6ni6PeFWtSucC9wFxzGMT8/0CHhNhYWuZ/YuC', 145, NULL, '2020-04-30 09:33:31', '2020-04-30 09:33:31'),
 (8, 'ujang', '$2y$10$sfy2A4SbDYpV49f7Y5etO.ymv.56o1cuOrOcVQC1tmRwvHUUSSnhG', 190, NULL, '2020-04-30 09:35:34', '2020-04-30 09:35:34'),
-(9, 'username', '$2y$10$d8CwwagsU138idsT7uukTevbUqoxwW5c0OSYjRtPa7hhV.AuFQIy.', 167, NULL, '2020-04-30 09:44:11', '2020-04-30 09:44:11');
+(9, 'username', '$2y$10$d8CwwagsU138idsT7uukTevbUqoxwW5c0OSYjRtPa7hhV.AuFQIy.', 167, NULL, '2020-04-30 09:44:11', '2020-04-30 09:44:11'),
+(10, 'admin', '$2y$10$9mwvocHbd2Gw9GGpWX1CB.97EaS0g1Aur5YMcKy4He301Lzfm4mku', 1, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -290,6 +359,12 @@ ALTER TABLE `failed_jobs`
 ALTER TABLE `guru`
   ADD PRIMARY KEY (`nip`),
   ADD UNIQUE KEY `guru_id_akun_unique` (`id_akun`);
+
+--
+-- Indexes for table `jadwal`
+--
+ALTER TABLE `jadwal`
+  ADD PRIMARY KEY (`id_jadwal`);
 
 --
 -- Indexes for table `mapel`
@@ -339,13 +414,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `aktifitas`
 --
 ALTER TABLE `aktifitas`
-  MODIFY `id_aktifitas` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_aktifitas` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -354,10 +429,16 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `jadwal`
+--
+ALTER TABLE `jadwal`
+  MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `mapel`
 --
 ALTER TABLE `mapel`
-  MODIFY `id_mapel` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_mapel` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -369,7 +450,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

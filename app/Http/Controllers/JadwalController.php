@@ -6,9 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Mapel;
 use Illuminate\Support\Facades\DB;
-use App\Detailjadwal;
 use App\Aktifitas;
-use App\Jadwalkegiatan;
+use App\Jadwal;
 
 class JadwalController extends Controller
 {
@@ -20,16 +19,15 @@ class JadwalController extends Controller
     public function index(Request $request)
     {
         $nis = Auth::user()->siswa->nis;
-        $id = $nis. date('dmy');
-        settype($id,"integer");
-
-        $detailjadwal = Detailjadwal::with('mapel')->with('activity')
-            ->where('id_jadwal','=', $id)
+        
+        $jadwal = Jadwal::with('mapel')->with('aktifitas')
+            ->where('nis', $nis)
+            ->whereDate('tanggal', date('ymd'))
             ->get();
         $mapel = Mapel::all();
         $aktifitas = Aktifitas::all();
 
-        return view('murid.setjadwal', compact('detailjadwal', 'id','mapel','aktifitas'));
+        return view('murid.setjadwal', compact('jadwal','mapel','aktifitas'));
     }
 
     /**
@@ -50,21 +48,15 @@ class JadwalController extends Controller
      */
     public function store(Request $request)
     {
-        //id
         $nis = Auth::user()->siswa->nis;
-        $id = $nis. date('dmy');
-        //cek db
-        $jadwalKegiatan = DB::table('jadwal_kegiatan')
-            ->where('tanggal','=', date('dmy'))
-            ->get();
-        if (count($jadwalKegiatan) < 1) {
-            Jadwalkegiatan::create([
-                'id_jadwal' => $id,
-                'nis' => $nis,
-                'tanggal' => date('dmy')
-            ]);
-        }
-        $detailJadwal = Detailjadwal::create($request->all());
+        $jadwal = Jadwal::create([
+            'nis' => $nis,
+            'tanggal' => $request->tanggal,
+            'jam_mulai' => $request->jam_mulai,
+            'jam_akhir' => $request->jam_akhir,
+            'id_aktifitas' => $request->id_aktifitas,
+            'id_mapel' => $request->id_mapel,
+        ]);
         return redirect()->route('jadwal.index');
     }
 

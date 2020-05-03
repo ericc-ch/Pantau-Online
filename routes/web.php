@@ -60,7 +60,10 @@ Route::group(['prefix'=>'murid'], function (){
     Route::get('/jadwal', 'JadwalController@index')->name('jadwal.index');
     Route::post('/jadwal', 'JadwalController@store')->name('jadwal.store');
     Route::get('/pembuktian','PembuktianController@index')->name('pembuktian.index');
-    Route::post('/pembuktian','PembuktianController@store')->name('pembuktian.store');
+    Route::patch('/pembuktian/{id_jadwal}','PembuktianController@update')->name('pembuktian.update');
+    Route::get('/pembuktian/{id_jadwal}','PembuktianController@edit')->name('pembuktian.edit');
+    Route::post('/pembuktian/cari','PembuktianController@alihkan')->name('pembuktian.alihkan');
+    Route::get('/pembuktian/cari/{tgl}','PembuktianController@cari')->name('pembuktian.cari');
     
 });
 

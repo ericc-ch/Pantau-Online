@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
-use App\Detailjadwal;
+use App\Jadwal;
 use Illuminate\Http\Request;
 
 class PembuktianController extends Controller
@@ -17,14 +16,12 @@ class PembuktianController extends Controller
     public function index()
     {
         $nis = Auth::user()->siswa->nis;
-        $id = $nis. date('dmy');
-        settype($id,"integer");
+        $jadwal = Jadwal::with('mapel')->with('aktifitas')
+            ->where('nis', $nis)
+            ->whereDate('tanggal', date('ymd'))
+            ->get();
 
-        $detailjadwal = Detailjadwal::with('mapel')->with('activity')
-        ->where('id_jadwal','=', $id)
-        ->get();
-
-        return view('murid.pembuktian', compact('detailjadwal'));
+        return view('murid.pembuktian', compact('jadwal'));
     }
 
     /**
@@ -32,9 +29,10 @@ class PembuktianController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function alihkan(Request $request)
     {
-        //
+        $tgl = $request->tanggal;
+        return redirect()->route('pembuktian.cari', $tgl);
     }
 
     /**
@@ -45,22 +43,6 @@ class PembuktianController extends Controller
      */
     public function store(Request $request)
     {
-        $nama_aktifitas = $request->get('aktifitas');
-        $nama_mapel = $request->get('mapel');
-        $rombel = Auth::user()->siswa->rombel;
-        //nama file bukti
-        $nama_bukti = Auth::user()->siswa->nama.' '.$nama_aktifitas.'.'.$request->bukti->extension();
-        $new_bukti = new \App\Pembuktian;
-        $new_bukti->id_jadwal = $request->get('id_jadwal');
-        $new_bukti->id_aktifitas = $request->get('id_aktifitas');
-        $new_bukti->tanggal_mengumpulkan = date('ymd');
-        if($request->file('bukti')){
-             $new_bukti->bukti = $nama_bukti;
-             $request->file('bukti')->move(public_path('bukti/'.$rombel.'/'.$nama_mapel.'/'), $nama_bukti );
-        }
-        $new_bukti->save();
-        return redirect()->route('pembuktian.index');
-
         
 
     }
@@ -71,9 +53,15 @@ class PembuktianController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function cari($tgl)
     {
-        //
+        $nis = Auth::user()->siswa->nis;
+        $jadwal = Jadwal::with('mapel')->with('aktifitas')
+            ->where('nis', $nis)
+            ->whereDate('tanggal', $tgl)
+            ->get();
+
+        return view('murid.pembuktian', compact('jadwal'));
     }
 
     /**
@@ -94,9 +82,22 @@ class PembuktianController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_jadwal)
     {
-        //
+        $jadwal = Jadwal::find($id_jadwal);
+        $nama_aktifitas = $jadwal->aktifitas->nama_aktifitas;
+        $nama_mapel = $jadwal->mapel->nama_mapel;
+        $rombel = Auth::user()->siswa->rombel;
+        //nama file
+        $nama_bukti = Auth::user()->siswa->nama.' '.$nama_aktifitas.'.'.$request->bukti->extension();
+        $updateJadwal = Jadwal::where('id_jadwal', $id_jadwal)
+        ->update([
+            'bukti' => $nama_bukti
+        ]);
+        if ($updateJadwal){
+            $request->file('bukti')->move(public_path('bukti/'.$rombel.'/'.$nama_mapel.'/'), $nama_bukti );
+        }
+        return redirect()->route('pembuktian.index');
     }
 
     /**
