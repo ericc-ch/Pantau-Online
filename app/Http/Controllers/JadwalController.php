@@ -56,6 +56,7 @@ class JadwalController extends Controller
             'jam_akhir' => $request->jam_akhir,
             'id_aktifitas' => $request->id_aktifitas,
             'id_mapel' => $request->id_mapel,
+            'validasi' => 'no'
         ]);
         return redirect()->route('jadwal.index');
     }
