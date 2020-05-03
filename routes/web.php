@@ -50,6 +50,10 @@ Route::group(['prefix' => 'guru'], function() {
 Route::group(['prefix' => 'ortu'], function() {
     Route::get('/register', 'OrtuAuth\RegisterController@showRegistrationForm')->name('ortu.register');
     Route::post('/register', 'OrtuAuth\RegisterController@register')->name('ortu.register.submit');
+    Route::get('/kegiatan-anak', 'OrtuController@kegiatanAnak')->name('ortu.kegiatan-anak');
+    Route::patch('/kegiatan-anak/{id_jadwa}', 'OrtuController@update')->name('ortu.update');
+    Route::post('/kegiatan-anak/cari', 'OrtuController@alihkan')->name('ortu.alihkan');
+    Route::get('/kegiatan-anak/cari/{tgl}', 'OrtuController@cari')->name('ortu.cari');
     Route::get('/dashboard', function() {
         return view('ortu.index');
     })->name('ortu.dashboard')->middleware('cekuser:ortu');
