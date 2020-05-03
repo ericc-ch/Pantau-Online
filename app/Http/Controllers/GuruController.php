@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Guru;
-use App\Jadwalkegiatan;
-use App\Detailjadwal;
 use App\Siswa;
-use App\Pembuktian;
+use App\Jadwal;
 use Auth;
 
 class GuruController extends Controller
@@ -40,26 +37,18 @@ class GuruController extends Controller
     
     public function laporan_siswa_detail($nis)
     {
-        $pembuktians = Pembuktian::first();
-        $siswa = Siswa::select('nis', 'nama')->where('nis', $nis)->first();
+        $pj = Auth::user()->guru->pj;
 
-        if(empty($pembuktians)){
-            $laporans = Detailjadwal::join('jadwal_kegiatan', 'jadwal_kegiatan.id_jadwal', '=', 'detail_jadwal.id_jadwal')
-                                    ->join('siswas', 'jadwal_kegiatan.nis', '=', 'siswas.nis')
-                                    ->where('jadwal_kegiatan.nis', $nis)
-                                    ->get();
-            $laporan = $laporans->first();
-            $pembuktian = Pembuktian::where('id_jadwal', $laporan->id_jadwal)->first();
-        }else {
-            $laporans = Detailjadwal::join('jadwal_kegiatan', 'jadwal_kegiatan.id_jadwal', '=', 'detail_jadwal.id_jadwal')
-                                    ->join('siswas', 'jadwal_kegiatan.nis', '=', 'siswas.nis')
-                                    ->join('pembuktian', 'detail_jadwal.id_jadwal', '=', 'pembuktian.id_jadwal')
-                                    ->where('jadwal_kegiatan.nis', $nis)
-                                    ->get();
-        }
+        $siswa = Siswa::select('nis', 'nama', 'rayon')->where('nis', $nis)->first();
 
-        return view('guru.laporan.detail-laporan', compact('laporans', 'siswa', 'pembuktian'));
+        $laporans = Jadwal::join('siswas', 'jadwal.nis', '=', 'siswas.nis')
+                        ->where('jadwal.nis', $nis)
+                        ->where('siswas.rombel', $pj)
+                        ->get();
+
+        return view('guru.laporan.detail-laporan', compact('laporans', 'siswa'));
     }
+    
     // LAPORAN BERDASARKAN RAYON
     public function laporan_siswa_rayon()
     {
@@ -69,24 +58,15 @@ class GuruController extends Controller
     }
     public function laporan_siswa_rayon_detail($nis)
     {
-        $pembuktians = Pembuktian::first();
-        $siswa = Siswa::select('nis', 'nama')->where('nis', $nis)->first();
+        $ps = Auth::user()->guru->ps;
 
-        if(empty($pembuktians)){
-            $laporans = Detailjadwal::join('jadwal_kegiatan', 'jadwal_kegiatan.id_jadwal', '=', 'detail_jadwal.id_jadwal')
-                                    ->join('siswas', 'jadwal_kegiatan.nis', '=', 'siswas.nis')
-                                    ->where('jadwal_kegiatan.nis', $nis)
-                                    ->get();
-            $laporan = $laporans->first();
-            $pembuktian = Pembuktian::where('id_jadwal', $laporan->id_jadwal)->first();
-        }else {
-            $laporans = Detailjadwal::join('jadwal_kegiatan', 'jadwal_kegiatan.id_jadwal', '=', 'detail_jadwal.id_jadwal')
-                                    ->join('siswas', 'jadwal_kegiatan.nis', '=', 'siswas.nis')
-                                    ->join('pembuktian', 'detail_jadwal.id_jadwal', '=', 'pembuktian.id_jadwal')
-                                    ->where('jadwal_kegiatan.nis', $nis)
-                                    ->get();
-        }
+        $siswa = Siswa::select('nis', 'nama', 'rombel')->where('nis', $nis)->first();
 
-        return view('guru.laporan.detail-laporan', compact('laporans', 'siswa', 'pembuktian'));
+        $laporans = Jadwal::join('siswas', 'jadwal.nis', '=', 'siswas.nis')
+                        ->where('jadwal.nis', $nis)
+                        ->where('siswas.rayon', $ps)
+                        ->get();
+
+        return view('guru.laporan.detail-laporan', compact('laporans', 'siswa'));
     }
 }

@@ -33,6 +33,21 @@
                     <input type="text" name="nama" id="nama" readonly class="form-control" value="{{ $siswa->nama }}">
                 </div>
             </div>
+            @if (request()->routeIs('guru.laporansiswa.detail'))
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="rayon">Rayon</label>
+                    <input type="text" name="rayon" id="rayon" readonly class="form-control" value="{{ $siswa->rayon }}">
+                </div>
+            </div>
+            @else
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="rombel">Rombel</label>
+                    <input type="text" name="rombel" id="rombel" readonly class="form-control" value="{{ $siswa->rombel }}">
+                </div>
+            </div>
+            @endif
         </div>
 
         <table class="table table-bordered" id="table">
@@ -41,26 +56,20 @@
                     <th>Hari, Tanggal</th>
                     <th>Aktifitas</th>
                     <th>Mata Pelajaran</th>
-                    @if ( $pembuktian['tanggal_mengumpulkan'] == null )
-                    <th>Tgl Mengumpulkan & Bukti</th>
-                    @else
                     <th>Tgl Mengumpulkan</th>
                     <th>Bukti</th>
-                    @endif
+                    <th>Verifikasi ortu</th>
                 </tr>
             </thead>
             <tbody align="center">
                 @foreach( $laporans as $laporan )
                 <tr>
                     <td>{{ $laporan->tanggal }}</td>
-                    <td>{{ $laporan->activity->nama_aktifitas }}</td>
+                    <td>{{ $laporan->aktifitas->nama_aktifitas }}</td>
                     <td>{{ $laporan->mapel->nama_mapel }}</td>
-                    @if ( $pembuktian['tanggal_mengumpulkan'] == null )
-                        <td colspan="2" class="text-danger">Belum Mengumpulkan</td>
-                    @else
-                        <td>{{ $pembuktian['tanggal_mengumpulkan'] }}</td>
-                        <td>{{ $pembuktian['bukti'] }}</td>
-                    @endif
+                    <td>{{ $laporan->updated_at->format('d M Y') }}</td>
+                    <td>{{ $laporan->bukti }}</td>
+                    <td>{{ $laporan->validasi == null ? 'Belum diverifikasi Ortu' : $laporan->validasi }}</td>
                 </tr>
                 @endforeach
             </tbody>
