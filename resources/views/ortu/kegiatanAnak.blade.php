@@ -1,4 +1,4 @@
-@extends('layouts.murid.main')
+@extends('layouts.ortu.main')
 
 @section('content')
 
@@ -8,12 +8,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Pembuktian</h1>
+                    <h1 class="m-0 text-dark">Kegiatan Anak</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/murid">Home</a></li>
-                        <li class="breadcrumb-item active">Pembuktian</li>
+                        <li class="breadcrumb-item active">Kegiatan Anak</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -31,12 +31,12 @@
                             <h3 class="card-title">Jadwal </h3>
                         </div>
                         <div class="col-md-6">
-                            <form action="{{route('pembuktian.alihkan')}}" class="form-data" method="post">
-                            @csrf
+                            <form action="{{route('ortu.alihkan')}}" class="form-data" method="post">
+                                @csrf
                                 <div class="row">
                                     <div class="col-sm-10">
-                                        <input type="date" name="tanggal" id="tanggal" class="form-control float-lg-right"
-                                            required="true">
+                                        <input type="date" name="tanggal" id="tanggal"
+                                            class="form-control float-lg-right" required="true">
                                     </div>
                                     <div class="col-sm-2">
                                         <button type="submit" id="simpan" class="btn btn-primary float-lg-right">
@@ -64,6 +64,8 @@
                                                 <th>Aktifitas</th>
                                                 <th>Mapel</th>
                                                 <th>Bukti</th>
+                                                <th>Status Verifikasi</th>
+                                                <th>Verifikasi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -74,12 +76,33 @@
                                                 <td>{{$data->aktifitas->nama_aktifitas}}</td>
                                                 <td>{{$data->mapel->nama_mapel}}</td>
                                                 <td>
-                                                    <form method="POST" enctype="multipart/form-data"
-                                                        action="{{route('pembuktian.update', $data->id_jadwal)}}">
+                                                    @if ($data->bukti)
+                                                    <img src="{{asset('storage/bukti/'.$data->siswa->rombel.'/'.$data->mapel->nama_mapel.'/'.$data->bukti)}}" width="70px">
+                                                    @else
+                                                        Belum ada bukti
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if ($data->bukti)
+                                                        @if ($data->validasi == 'yes')
+                                                            <div class="alert alert-success">
+                                                                Sudah
+                                                            </div>
+                                                        @else
+                                                            <div class="alert alert-danger">
+                                                                Belum
+                                                            </div>
+                                                        @endif
+                                                    @else
+                                                        Belum ada bukti
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                <form method="POST"
+                                                        action="{{route('ortu.update', $data->id_jadwal)}}">
                                                         @method('patch')
                                                         @csrf
-                                                        <input type="file" name="bukti" required>
-                                                        <button type="submit" class="btn btn-primary">Upload</button>
+                                                        <button type="submit" class="btn btn-primary">Verifikasi</button>
                                                     </form>
                                                 </td>
                                             </tr>

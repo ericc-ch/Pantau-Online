@@ -16,7 +16,7 @@ class Jadwal extends Model
 
     public function siswa()
     {
-        return $this->belongsTo('App\User', 'nis');
+        return $this->belongsTo('App\Siswa', 'nis');
     }
 
     public function aktifitas()
