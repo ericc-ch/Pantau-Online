@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    Registrasi Orang Tua
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -12,10 +16,10 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="nik" class="col-md-4 col-form-label text-md-right">{{ __('NIK Anda') }}</label>
+                            <label for="nik" class="col-md-4 col-form-label text-md-right">{{ __('NIK') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nik" type="number" class="form-control @error('nik') is-invalid @enderror" name="nik" value="{{ old('nik') }}" required autocomplete="nik">
+                                <input id="nik" type="number" class="form-control @error('nik') is-invalid @enderror" name="nik" value="{{ old('nik') }}" required autocomplete="nik" autofocus>
 
                                 @error('nik')
                                     <span class="invalid-feedback" role="alert">
@@ -29,7 +33,7 @@
                             <label for="nama" class="col-md-4 col-form-label text-md-right">{{ __('Nama lengkap') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nama" type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}" required autocomplete="nama" autofocus>
+                                <input id="nama" type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}" required autocomplete="nama">
 
                                 @error('nama')
                                     <span class="invalid-feedback" role="alert">

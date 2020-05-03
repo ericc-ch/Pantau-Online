@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Auth;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 
 class MuridController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         $this->middleware('cekuser');
     }
