@@ -33,6 +33,21 @@
                     <input type="text" name="nama" id="nama" readonly class="form-control" value="{{ $siswa->nama }}">
                 </div>
             </div>
+            @if (request()->routeIs('guru.laporansiswa.detail'))
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="rayon">Rayon</label>
+                    <input type="text" name="rayon" id="rayon" readonly class="form-control" value="{{ $siswa->rayon }}">
+                </div>
+            </div>
+            @else
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="rombel">Rombel</label>
+                    <input type="text" name="rombel" id="rombel" readonly class="form-control" value="{{ $siswa->rombel }}">
+                </div>
+            </div>
+            @endif
         </div>
 
         <table class="table table-bordered" id="table">
@@ -41,25 +56,35 @@
                     <th>Hari, Tanggal</th>
                     <th>Aktifitas</th>
                     <th>Mata Pelajaran</th>
-                    @if ( $pembuktian['tanggal_mengumpulkan'] == null )
-                    <th>Tgl Mengumpulkan & Bukti</th>
-                    @else
                     <th>Tgl Mengumpulkan</th>
                     <th>Bukti</th>
-                    @endif
+                    <th>Lihat</th>
                 </tr>
             </thead>
             <tbody align="center">
-                @foreach( $laporans as $laporan )
+                @foreach( $laporans as $lap )
                 <tr>
-                    <td>{{ $laporan->tanggal }}</td>
-                    <td>{{ $laporan->activity->nama_aktifitas }}</td>
-                    <td>{{ $laporan->mapel->nama_mapel }}</td>
-                    @if ( $pembuktian['tanggal_mengumpulkan'] == null )
-                        <td colspan="2" class="text-danger">Belum Mengumpulkan</td>
+                    <td>{{ $lap->tanggal }}</td>
+                    <td>{{ $lap->aktifitas->nama_aktifitas }}</td>
+                    <td>{{ $lap->mapel->nama_mapel }}</td>
+                    <td>{{ $lap->updated_at->format('d M Y') }}</td>
+                    @if ( empty($lap->bukti) && $lap->validasi == 'no' )
+                        <td><span class="badge badge-warning">Belum mengumpulkan</span></td>
+                        <td><span class="badge badge-warning">Belum mengumpulkan</span></td>
+                    @elseif ( !empty($lap->bukti) && $lap->validasi == 'no' )
+                        <td><img src="{{ asset('bukti/'. $lap->rombel .'/'. $lap->mapel->nama_mapel .'/'. $lap->bukti) }}" width="70px" alt="Gambar Bukti"></td>
+                        <td><span class="badge badge-warning">Belum diverifikasi ortu</span></td>
+                    @elseif ( empty($lap->bukti) && $lap->validasi == 'yes' )
+                        <td><span class="badge badge-warning">Belum mengumpulkan</span></td>
+                        <td><span class="badge badge-warning">Belum diverifikasi ortu</span></td>
                     @else
-                        <td>{{ $pembuktian['tanggal_mengumpulkan'] }}</td>
-                        <td>{{ $pembuktian['bukti'] }}</td>
+                        <td><img src="{{ asset('bukti/'. $lap->rombel .'/'. $lap->mapel->nama_mapel .'/'. $lap->bukti) }}" width="70px" alt="Gambar Bukti"></td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modalpop"
+                                    data-src="{{ asset('bukti/'. $lap->rombel .'/'. $lap->mapel->nama_mapel .'/'. $lap->bukti) }}">
+                                Lihat
+                            </button>
+                        </td>
                     @endif
                 </tr>
                 @endforeach
@@ -69,12 +94,35 @@
     </section>
     <!-- /.content -->
 </div>
+
+  
+  <!-- Modal -->
+  <div class="modal" tabindex="-1" role="dialog" id="modalpop">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content m-0">
+        <div class="modal-body">
+          <div class="product-zoom">
+            <img src="" width="465px">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 @endsection
 
 @section('js')
-    <script>
+    <script type="text/javascript">
         $(function () {
             $("#table").DataTable();
         });
-    </script>
+
+        $(document).ready(function(){
+        
+          $('#modalpop').on('show.bs.modal', function(e){
+            $(this).find('img').attr('src', $(e.relatedTarget).data('src'));
+          });
+    
+        });
+      </script>
 @endsection

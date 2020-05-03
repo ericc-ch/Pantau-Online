@@ -13,24 +13,27 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+               @if( !empty(Auth::user()->guru->pj) )
                 <li class="nav-item has-treeview menu-open">
                     <a href="{{ route('guru.siswa.pj') }}" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            Data Siswa {{ Auth::user()->guru->pj }}
+                            Siswa {{ Auth::user()->guru->pj }}
                         </p>
                     </a>
                 </li>
+                @endif
                 @if( !empty(Auth::user()->guru->ps) )
                     <li class="nav-item has-treeview menu-open">
                         <a href="{{ route('guru.siswa.ps') }}" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
-                                Data Siswa {{ Auth::user()->guru->ps }}
+                                Siswa {{ Auth::user()->guru->ps }}
                             </p>
                         </a>
                     </li>
                 @endif
+                @if( !empty(Auth::user()->guru->pj) )
                 <li class="nav-item">
                     <a href="{{ route('guru.laporansiswa') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
@@ -39,6 +42,7 @@
                         </p>
                     </a>
                 </li>
+                @endif
                 @if( !empty(Auth::user()->guru->ps) )
                 <li class="nav-item">
                     <a href="{{ route('guru.laporansiswa.rayon') }}" class="nav-link">
