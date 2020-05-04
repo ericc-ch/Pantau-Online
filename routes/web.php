@@ -71,3 +71,5 @@ Route::group(['prefix'=>'murid'], function (){
 Auth::routes();
 
 Route::get('/', function() { return redirect('login'); });
+
+Route::get('/generate', 'GenerateUserController@generateSiswa');
