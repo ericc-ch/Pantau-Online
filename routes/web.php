@@ -60,6 +60,7 @@ Route::group(['prefix' => 'ortu'], function() {
 Route::group(['prefix'=>'murid'], function (){
     Route::get('/','MuridController@index')->name('murid.index');
     Route::get('/jadwal', 'JadwalController@index')->name('jadwal.index');
+    Route::get('/jadwal/aktifitas', 'JadwalController@getAktifitas')->name('murid.chained');
     Route::post('/jadwal', 'JadwalController@store')->name('jadwal.store');
     Route::get('/pembuktian','PembuktianController@index')->name('pembuktian.index');
     Route::patch('/pembuktian/{id_jadwal}','PembuktianController@update')->name('pembuktian.update');

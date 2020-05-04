@@ -10,7 +10,7 @@ class Aktifitas extends Model
 
     protected $primaryKey = 'id_aktifitas';
 
-    protected $fillable = ['nama_aktifitas'];
+    protected $fillable = ['id_mapel', 'nama_aktifitas'];
 
     public function jadwals()
     {
@@ -19,5 +19,9 @@ class Aktifitas extends Model
     public function jadwal()
     {
         return $this->haMany('App\Jadwal', 'id_aktifitas');
+    }
+    public function mapel()
+    {
+        return $this->belongsTo('App\Mapel', 'id_mapel');
     }
 }
