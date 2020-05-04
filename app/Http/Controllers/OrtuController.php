@@ -27,7 +27,7 @@ class OrtuController extends Controller
         ->update([
             'validasi' => 'yes'
         ]);
-        return redirect()->route('ortu.kegiatanAnak');
+        return redirect()->route('ortu.kegiatan-anak');
     }
     public function alihkan(Request $request )
     {
