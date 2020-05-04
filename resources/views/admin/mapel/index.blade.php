@@ -95,7 +95,8 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label>Mata Pelajaraan</label>
-                                <input type="text" name="nama_mapel" id="nama_mapel" class="form-control" required="true">
+                                <input type="text" name="nama_mapel" id="nama_mapel" class="form-control" >
+                                <p class="text-danger">{{ $errors->first('nama_mapel') }}</p>
                             </div>
                         </div>
                     </div>

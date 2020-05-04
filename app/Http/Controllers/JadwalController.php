@@ -33,16 +33,14 @@ class JadwalController extends Controller
 
         return view('murid.setjadwal', compact('jadwal','mapel','aktifitas'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function getAktifitas()
     {
-        //
+        $aktifitas = Aktifitas::where('id_mapel', request()->id_mapel)->get();
+        
+        return response()->json(['status'=>'success', 'data'=>$aktifitas]);
     }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -53,6 +51,15 @@ class JadwalController extends Controller
     public function store(Request $request)
     {
         $nis = Auth::user()->siswa->nis;
+
+        $this->validate($request, [
+            'tanggal'=>'required',
+            'jam_mulai'=>'required',
+            'jam_akhir'=>'required',
+            'id_aktifitas'=>'required',
+            'id_mapel'=>'reuired',
+        ]);
+
         $jadwal = Jadwal::create([
             'nis' => $nis,
             'tanggal' => $request->tanggal,
@@ -65,48 +72,4 @@ class JadwalController extends Controller
         return redirect()->route('jadwal.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

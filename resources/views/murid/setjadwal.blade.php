@@ -35,25 +35,28 @@
                         @csrf
                         <div class="row">
                             <div class="col-lg-12">
-                            <label>Tanggal</label>
+                            <label>Tanggal <span class="text-danger">*</span></label>
                                 <input type="date" name="tanggal" id="tanggal" class="form-control"
                                     required="true">
+                                    <p class="text-danger">{{ $errors->first('tanggal') }}</p>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row mt-3">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label>Jam Mulai</label>
+                                    <label>Jam Mulai <span class="text-danger">*</span></label>
                                     <input type="time" name="jam_mulai" id="jam_mulai" class="form-control"
                                         required="true">
+                                        <p class="text-danger">{{ $errors->first('jam_mulai') }}</p>
                                 </div>
                             </div>
 
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label>Jam Akhir</label>
+                                    <label>Jam Akhir <span class="text-danger">*</span></label>
                                     <input type="time" name="jam_akhir" id="jam_akhir" class="form-control"
                                         required="true">
+                                        <p class="text-danger">{{ $errors->first('jam_akhir') }}</p>
                                 </div>
                             </div>
 
@@ -62,25 +65,24 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label>Mata pelajaran</label>
-                                    <select name="id_mapel" id="id_mapel" class="form-control" required="true">
-                                        <option value=""></option>
+                                    <label>Mata pelajaran <span class="text-danger">*</span></label>
+                                    <select name="id_mapel" id="mapel" class="form-control" required="true">
+                                        <option value="" disabled selected>--- Mata Pelajaran ---</option>
                                         @foreach($mapel as $pel)
                                         <option value="{{$pel->id_mapel}}">{{$pel->nama_mapel}}</option>
                                         @endforeach
                                     </select>
+                                    <p class="text-danger">{{ $errors->first('id_mapel') }}</p>
                                 </div>
                             </div>
 
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label>Aktifitas</label>
-                                    <select name="id_aktifitas" id="id_aktifitas" class="form-control" required="true">
-                                        <option value=""></option>
-                                        @foreach($aktifitas as $aktif)
-                                        <option value="{{$aktif->id_aktifitas}}">{{$aktif->nama_aktifitas}}</option>
-                                        @endforeach
+                                    <label>Aktifitas <span class="text-danger">*</span></label>
+                                    <select name="id_aktifitas" id="aktifitas" class="form-control" required="true">
+                                        <option value="" disabled selected>--- Pilih Aktifitas ---</option>
                                     </select>
+                                    <p class="text-danger">{{ $errors->first('id_aktifitas') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -141,4 +143,23 @@
 <!-- /.content -->
 </div>
 
+@endsection
+
+@section('script')
+    <script>
+        $('#mapel').on('change', function(){
+            $.ajax({
+                url: "{{ route('murid.chained') }}",
+                type: "GET",
+                data: { id_mapel: $(this).val() },
+                success: function(html){
+                    $('#aktifitas').empty()
+                    $('#aktifitas').append('<option value="">Pilih Aktifitas</option>')
+                    $.each(html.data, function(key, item) {
+                        $('#aktifitas').append('<option value="'+item.id_aktifias+'">'+item.nama_aktifitas+'</option>')
+                    })
+                }
+            });
+        })
+    </script>
 @endsection

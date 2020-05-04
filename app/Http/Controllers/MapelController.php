@@ -22,17 +22,6 @@ class MapelController extends Controller
         $mapels = Mapel::all();
         return view('admin.mapel.index', compact('mapels'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -41,19 +30,11 @@ class MapelController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'nama_mapel' => 'required|string'
+        ]);
         Mapel::create($request->all());
         return redirect()->route('admin.mapel.index')->with('status', 'Data berhasil Di Simpan');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**

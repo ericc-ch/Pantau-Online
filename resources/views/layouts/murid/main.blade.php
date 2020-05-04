@@ -32,6 +32,7 @@
     <!-- ./wrapper -->
 
    @include('layouts.murid.script')
+   @yield('script')
 </body>
 
 </html>
