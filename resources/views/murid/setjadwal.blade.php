@@ -156,7 +156,7 @@
                     $('#aktifitas').empty()
                     $('#aktifitas').append('<option value="">Pilih Aktifitas</option>')
                     $.each(html.data, function(key, item) {
-                        $('#aktifitas').append('<option value="'+item.id_aktifias+'">'+item.nama_aktifitas+'</option>')
+                        $('#aktifitas').append('<option value="'+item.id_aktifitas+'">'+item.nama_aktifitas+'</option>')
                     })
                 }
             });

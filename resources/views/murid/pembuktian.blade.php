@@ -74,13 +74,18 @@
                                                 <td>{{$data->aktifitas->nama_aktifitas}}</td>
                                                 <td>{{$data->mapel->nama_mapel}}</td>
                                                 <td>
+                                                    @if($data->bukti || $data->bukti_lainnya )
+                                                    <span class="badge badge-success">Sudah</span>
+                                                    @else
                                                     <form method="POST" enctype="multipart/form-data"
                                                         action="{{route('pembuktian.update', $data->id_jadwal)}}">
                                                         @method('patch')
                                                         @csrf
-                                                        <input type="file" name="bukti" required>
+                                                        <input type="file" name="bukti">
+                                                        <input type="text" name="bukti_lainnya">
                                                         <button type="submit" class="btn btn-primary">Upload</button>
                                                     </form>
+                                                    @endif
                                                 </td>
                                             </tr>
                                             @endforeach

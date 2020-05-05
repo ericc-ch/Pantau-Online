@@ -38,6 +38,7 @@
                         <tr>
                             <th>No</th>
                             <th>Aktifitas</th>
+                            <th>Mata Pelajaran</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -46,6 +47,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $data->nama_aktifitas }}</td>
+                            <td>{{ $data->mapel->nama_mapel}}</td>
                             <td>
                                 <div class="row">
                                     <div class="col-lg-4">
@@ -96,6 +98,17 @@
                             <div class="form-group">
                                 <label>Aktifitas</label>
                                 <input type="text" name="nama_aktifitas" id="nama_aktifitas" class="form-control" required="true">
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Mata Pelajaraan</label>
+                                <select name="id_mapel" id="mapel" class="form-control" required="true">
+                                    <option value="" disabled selected>--- Mata Pelajaran ---</option>
+                                    @foreach($mapel as $pel)
+                                        <option value="{{$pel->id_mapel}}">{{$pel->nama_mapel}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>

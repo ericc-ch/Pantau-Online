@@ -37,7 +37,21 @@
                                     <label>Aktifitas</label>
                                     <input type="text" name="nama_aktifitas" id="nama_aktifitas" class="form-control"
                                         required="true" value="{{$aktifitas->nama_aktifitas}}">
+                                    </div>
                                 </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Mata Pelajaraan</label>
+                                    <select name="id_mapel" id="mapel" class="form-control" required="true">
+                                        @foreach($mapel as $pel)
+                                        @if($aktifitas->id_mapel == $pel->id_mapel )
+                                        <option value="{{$pel->id_mapel}}" selected>{{$pel->nama_mapel}}</option>
+                                        @else
+                                        <option value="{{$pel->id_mapel}}">{{$pel->nama_mapel}}</option>
+                                        @endif
+                                        @endforeach
+                                    </select>
                             </div>
                         </div>
                         <div class="form-group">

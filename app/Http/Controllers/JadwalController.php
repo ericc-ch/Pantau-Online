@@ -26,8 +26,9 @@ class JadwalController extends Controller
         
         $jadwal = Jadwal::with('mapel')->with('aktifitas')
             ->where('nis', $nis)
-            ->whereDate('tanggal', date('ymd'))
+            ->whereDate('tanggal', date('Y-m-d'))
             ->get();
+    
         $mapel = Mapel::all();
         $aktifitas = Aktifitas::all();
 
@@ -57,7 +58,7 @@ class JadwalController extends Controller
             'jam_mulai'=>'required',
             'jam_akhir'=>'required',
             'id_aktifitas'=>'required',
-            'id_mapel'=>'reuired',
+            'id_mapel'=>'required',
         ]);
 
         $jadwal = Jadwal::create([

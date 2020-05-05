@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Aktifitas;
+use App\Mapel;
 use Illuminate\Http\Request;
 
 class AktifitasController extends Controller
@@ -18,8 +19,9 @@ class AktifitasController extends Controller
      */
     public function index()
     {
-        $aktifitas = Aktifitas::all();
-        return view('admin.aktifitas.index', compact('aktifitas'));
+        $mapel = Mapel::all();
+        $aktifitas = Aktifitas::with('mapel')->get();
+        return view('admin.aktifitas.index', compact('aktifitas', 'mapel'));
     }
 
     /**
@@ -63,8 +65,9 @@ class AktifitasController extends Controller
      */
     public function edit($id_aktifitas)
     {
+        $mapel = Mapel::all();
         $aktifitas = Aktifitas::find($id_aktifitas);
-        return view('admin.aktifitas.edit', compact('aktifitas'));
+        return view('admin.aktifitas.edit', compact('aktifitas', 'mapel'));
     }
 
     /**
@@ -78,7 +81,8 @@ class AktifitasController extends Controller
     {
         Aktifitas::where('id_aktifitas', $id_aktifitas)
         ->update([
-            'nama_aktifitas' => $request->nama_aktifitas
+            'nama_aktifitas' => $request->nama_aktifitas,
+            'id_mapel' => $request->id_mapel
         ]);
     return redirect()->route('admin.aktifitas.index')->with('status', 'Data Berhasil Di update');
     }

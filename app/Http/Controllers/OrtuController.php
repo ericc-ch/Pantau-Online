@@ -14,10 +14,11 @@ class OrtuController extends Controller
 
     public function kegiatanAnak()
     {
+
         $nis = Auth::user()->ortu->nis;
         $jadwal = Jadwal::with('mapel')->with('aktifitas')->with('siswa')
             ->where('nis', $nis)
-            ->whereDate('tanggal', date('ymd'))
+            ->whereDate('tanggal', date('Y-m-d'))
             ->get();
         return view('ortu.kegiatanAnak', compact('jadwal'));
     }
