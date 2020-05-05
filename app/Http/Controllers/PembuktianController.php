@@ -23,7 +23,7 @@ class PembuktianController extends Controller
         $nis = Auth::user()->siswa->nis;
         $jadwal = Jadwal::with('mapel')->with('aktifitas')
             ->where('nis', $nis)
-            ->whereDate('tanggal', date('ymd'))
+            ->whereDate('tanggal', date('Y-m-d'))
             ->get();
 
         return view('murid.pembuktian', compact('jadwal'));
@@ -93,15 +93,40 @@ class PembuktianController extends Controller
         $nama_aktifitas = $jadwal->aktifitas->nama_aktifitas;
         $nama_mapel = $jadwal->mapel->nama_mapel;
         $rombel = Auth::user()->siswa->rombel;
-        //nama file
-        $nama_bukti = Auth::user()->siswa->nama.' '.$nama_aktifitas.'.'.$request->bukti->extension();
-        $updateJadwal = Jadwal::where('id_jadwal', $id_jadwal)
-        ->update([
-            'bukti' => $nama_bukti
-        ]);
-        if ($updateJadwal){
-            $request->file('bukti')->move(public_path('bukti/'.$rombel.'/'.$nama_mapel.'/'), $nama_bukti );
+
+        //cari jadwal berdasarkan id_jadwal
+        $updateJadwal = Jadwal::where('id_jadwal', $id_jadwal);
+
+        //cek kondisi ketika ada keduanya
+        if($request->bukti && $request->bukti_lainnya){
+
+            $nama_bukti = Auth::user()->siswa->nama.' '.$nama_aktifitas.' '.mt_rand().'.'.$request->bukti->extension();
+            $updateJadwal->update([
+                'bukti' => $nama_bukti,
+                'bukti_lainnya' => $request->bukti_lainnya
+            ]);
+            if ($updateJadwal){
+                $request->file('bukti')->move(public_path('bukti/'.$rombel.'/'.$nama_mapel.'/'), $nama_bukti );
+            }
+
+        //cek kondisi ketika cuma ada file bukti
+        } else if($request->bukti) {
+           
+            $nama_bukti = Auth::user()->siswa->nama.' '.$nama_aktifitas.' '.mt_rand().'.'.$request->bukti->extension();
+            
+            $updateJadwal->update([
+                'bukti' => $nama_bukti
+            ]);
+            if ($updateJadwal){
+                $request->file('bukti')->move(public_path('bukti/'.$rombel.'/'.$nama_mapel.'/'), $nama_bukti );
+            }
+        //cek kondisi ketika cuma ada text bukti
+        } else {
+            $updateJadwal->update([
+                'bukti_lainnya' => $request->bukti_lainnya
+            ]);
         }
+
         return redirect()->route('pembuktian.index');
     }
 

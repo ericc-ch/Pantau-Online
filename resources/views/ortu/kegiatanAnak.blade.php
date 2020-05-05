@@ -76,25 +76,32 @@
                                                 <td>{{$data->aktifitas->nama_aktifitas}}</td>
                                                 <td>{{$data->mapel->nama_mapel}}</td>
                                                 <td>
-                                                    @if ($data->bukti)
-                                                    <img src="{{asset('storage/bukti/'.$data->siswa->rombel.'/'.$data->mapel->nama_mapel.'/'.$data->bukti)}}" width="70px">
-                                                    @else
-                                                        Belum ada bukti
+                                                    @if ($data->bukti  &&  $data->bukti_lainnya)
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                        <img src="{{asset('bukti/'.$data->siswa->rombel.'/'.$data->mapel->nama_mapel.'/'.$data->bukti)}}" width="70px">
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <span class="badge badge-info">{{$data->bukti_lainnya}}</span>
+                                                        </div>
+                                                    </div>
+                                                    @elseif($data->bukti_lainnya)
+                                                    <span class="badge badge-info">{{$data->bukti_lainnya}}</span>
+                                                    @elseif($data->bukti)
+                                                    <img src="{{asset('bukti/'.$data->siswa->rombel.'/'.$data->mapel->nama_mapel.'/'.$data->bukti)}}" width="70px">
+                                                    @else 
+                                                    <span class="badge badge-warning">Belum Ada Bukti</span>
                                                     @endif
                                                 </td>
                                                 <td>
                                                     @if ($data->bukti)
                                                         @if ($data->validasi == 'yes')
-                                                            <div class="alert alert-success">
-                                                                Sudah
-                                                            </div>
+                                                        <span class="badge badge-info">Sudah Verifikasi</span>
                                                         @else
-                                                            <div class="alert alert-danger">
-                                                                Belum
-                                                            </div>
+                                                        <span class="badge badge-warning">Belum Verifikasi</span>
                                                         @endif
                                                     @else
-                                                        Belum ada bukti
+                                                        <span class="badge badge-warning">Belum Ada Bukti</span>
                                                     @endif
                                                 </td>
                                                 <td>
@@ -102,7 +109,7 @@
                                                         action="{{route('ortu.update', $data->id_jadwal)}}">
                                                         @method('patch')
                                                         @csrf
-                                                        <button type="submit" class="btn btn-primary">Verifikasi</button>
+                                                        <button type="submit" class="btn btn-sm btn-info">Verifikasi</button>
                                                     </form>
                                                 </td>
                                             </tr>
