@@ -1,9 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-        <img src="{{asset('assets/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo"
-            class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Pantau Gan</span>
+        <span class="brand-text font-weight-light">Monitoring Agenda Harian<br><center>Siswa</center></span>
     </a>
 
     <!-- Sidebar -->
@@ -24,14 +22,33 @@
                 </li>
                 @endif
                 @if( !empty(Auth::user()->guru->ps) )
-                    <li class="nav-item has-treeview menu-open">
-                        <a href="{{ route('guru.siswa.ps') }}" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>
-                                Siswa {{ Auth::user()->guru->ps }}
-                            </p>
-                        </a>
-                    </li>
+                    @if ( strpos(Auth::user()->guru->ps, ',') )
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="{{ route('guru.siswa.ps') }}" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Siswa {{ explode(',', Auth::user()->guru->ps)[0] }}
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="{{ route('guru.siswa.ps.kedua') }}" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Siswa {{ explode(',', Auth::user()->guru->ps)[1] }}
+                                </p>
+                            </a>
+                        </li>
+                    @else
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="{{ route('guru.siswa.ps') }}" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Siswa {{ Auth::user()->guru->ps }}
+                                </p>
+                            </a>
+                        </li>
+                    @endif
                 @endif
                 @if( !empty(Auth::user()->guru->pj) )
                 <li class="nav-item">
@@ -44,14 +61,33 @@
                 </li>
                 @endif
                 @if( !empty(Auth::user()->guru->ps) )
-                <li class="nav-item">
-                    <a href="{{ route('guru.laporansiswa.rayon') }}" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Laporan Siswa {{ Auth::user()->guru->ps }}
-                        </p>
-                    </a>
-                </li>
+                    @if ( strpos(Auth::user()->guru->ps, ',') )
+                        <li class="nav-item">
+                            <a href="{{ route('guru.laporansiswa.rayon') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Laporan Siswa {{ explode(',', Auth::user()->guru->ps)[0] }}
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('guru.laporansiswa.rayon.kedua') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Laporan Siswa {{ explode(',', Auth::user()->guru->ps)[1] }}
+                                </p>
+                            </a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a href="{{ route('guru.laporansiswa.rayon') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Laporan Siswa {{ Auth::user()->guru->ps }}
+                                </p>
+                            </a>
+                        </li>
+                    @endif
                 @endif
             </ul>
         </nav>

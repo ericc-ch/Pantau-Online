@@ -26,9 +26,28 @@ class GuruController extends Controller
 
     public function siswa_ps()
     {
-        $ps = Auth::user()->guru->ps;
+        $ps_all = Auth::user()->guru->ps;
+        if ( strpos($ps_all, ',') != false ) {
+            $ps = explode(', ', $ps_all);
+            $siswas = Siswa::where('rayon', $ps[0])->orderBy('nama', 'ASC')->get();
+        }else{
+            $ps = $ps_all;
+            $siswas = Siswa::where('rayon', $ps)->orderBy('nama', 'ASC')->get();
+        }
         
-        $siswas = Siswa::where('rayon', $ps)->orderBy('nama', 'ASC')->get();
+        return view('guru.siswa', compact('siswas'));
+    }
+
+    public function siswa_ps_kedua()
+    {
+        $ps_all = Auth::user()->guru->ps;
+        if ( strpos($ps_all, ',') != false ) {
+            $ps = explode(', ', $ps_all);
+            $siswas = Siswa::where('rayon', $ps[1])->orderBy('nama', 'ASC')->get();
+        }else{
+            $ps = $ps_all;
+            $siswas = Siswa::where('rayon', $ps)->orderBy('nama', 'ASC')->get();
+        }
         
         return view('guru.siswa', compact('siswas'));
     }
@@ -57,7 +76,27 @@ class GuruController extends Controller
     // LAPORAN BERDASARKAN RAYON
     public function laporan_siswa_rayon()
     {
-        $laporans = Siswa::where('rayon', Auth::user()->guru->ps)->get();
+        $ps_all = Auth::user()->guru->ps;
+        if ( strpos($ps_all, ',') != false ) {
+            $ps = explode(', ', $ps_all);
+            $laporans = Siswa::where('rayon', $ps[0])->get();
+        }else{
+            $ps = $ps_all;
+            $laporans = Siswa::where('rayon', $ps)->get();
+        }
+        
+        return view('guru.laporan.laporan-siswa', compact('laporans'));
+    }
+    public function laporan_siswa_rayon_kedua()
+    {
+        $ps_all = Auth::user()->guru->ps;
+        if ( strpos($ps_all, ',') != false ) {
+            $ps = explode(', ', $ps_all);
+            $laporans = Siswa::where('rayon', $ps[1])->get();
+        }else{
+            $ps = $ps_all;
+            $laporans = Siswa::where('rayon', $ps)->get();
+        }
         
         return view('guru.laporan.laporan-siswa', compact('laporans'));
     }
