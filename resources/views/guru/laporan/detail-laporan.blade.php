@@ -56,7 +56,6 @@
                     <th>Hari, Tanggal</th>
                     <th>Aktifitas</th>
                     <th>Mata Pelajaran</th>
-                    <th>Tgl Mengumpulkan</th>
                     <th>Bukti</th>
                     <th>Lihat</th>
                 </tr>
@@ -67,7 +66,6 @@
                     <td>{{ $lap->tanggal }}</td>
                     <td>{{ $lap->aktifitas->nama_aktifitas }}</td>
                     <td>{{ $lap->mapel->nama_mapel }}</td>
-                    <td>{{ $lap->updated_at->format('d M Y') }}</td>
                     @if ( empty($lap->bukti) && $lap->validasi == 'no' )
                         <td><span class="badge badge-warning">Belum mengumpulkan</span></td>
                         <td><span class="badge badge-warning">Belum mengumpulkan</span></td>

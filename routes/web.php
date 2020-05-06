@@ -39,9 +39,11 @@ Route::group(['prefix' => 'guru'], function() {
 
     Route::get('/siswa/rombel', 'GuruController@siswa_pj')->name('guru.siswa.pj');
     Route::get('/siswa/rayon', 'GuruController@siswa_ps')->name('guru.siswa.ps');
+    Route::get('/siswa/rayon/kedua', 'GuruController@siswa_ps_kedua')->name('guru.siswa.ps.kedua');
     Route::get('/laporan/rombel', 'GuruController@laporan_siswa')->name('guru.laporansiswa');
     Route::get('/laporan/rombel/{nis}', 'GuruController@laporan_siswa_detail')->name('guru.laporansiswa.detail');
     Route::get('/laporan/rayon', 'GuruController@laporan_siswa_rayon')->name('guru.laporansiswa.rayon');
+    Route::get('/laporan/rayon/kedua', 'GuruController@laporan_siswa_rayon_kedua')->name('guru.laporansiswa.rayon.kedua');
     Route::get('/laporan/rayon/{nis}', 'GuruController@laporan_siswa_rayon_detail')->name('guru.laporansiswa.rayon.detail');
 });
 
