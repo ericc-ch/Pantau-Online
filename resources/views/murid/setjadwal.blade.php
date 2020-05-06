@@ -35,10 +35,9 @@
                         @csrf
                         <div class="row">
                             <div class="col-lg-12">
-                            <label>Tanggal <span class="text-danger">*</span></label>
-                                <input type="date" name="tanggal" id="tanggal" class="form-control"
-                                    required="true">
-                                    <p class="text-danger">{{ $errors->first('tanggal') }}</p>
+                                <label>Tanggal <span class="text-danger">*</span></label>
+                                <input type="date" name="tanggal" id="tanggal" class="form-control" required="true">
+                                <p class="text-danger">{{ $errors->first('tanggal') }}</p>
                             </div>
                         </div>
                         <div class="row mt-3">
@@ -47,7 +46,7 @@
                                     <label>Jam Mulai <span class="text-danger">*</span></label>
                                     <input type="time" name="jam_mulai" id="jam_mulai" class="form-control"
                                         required="true">
-                                        <p class="text-danger">{{ $errors->first('jam_mulai') }}</p>
+                                    <p class="text-danger">{{ $errors->first('jam_mulai') }}</p>
                                 </div>
                             </div>
 
@@ -56,7 +55,7 @@
                                     <label>Jam Akhir <span class="text-danger">*</span></label>
                                     <input type="time" name="jam_akhir" id="jam_akhir" class="form-control"
                                         required="true">
-                                        <p class="text-danger">{{ $errors->first('jam_akhir') }}</p>
+                                    <p class="text-danger">{{ $errors->first('jam_akhir') }}</p>
                                 </div>
                             </div>
 
@@ -111,6 +110,7 @@
                                                     <th>Waktu</th>
                                                     <th>Aktifitas</th>
                                                     <th>Mapel</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -120,6 +120,26 @@
                                                     <td>{{$data->jam_mulai}} - {{$data->jam_akhir}} </td>
                                                     <td>{{$data->aktifitas->nama_aktifitas}}</td>
                                                     <td>{{$data->mapel->nama_mapel}}</td>
+                                                    <td>
+                                                        <div class="row">
+                                                            <div class="col-lg-4">
+                                                                <a href="{{route('jadwal.edit', $data->id_jadwal)}}"
+                                                                    class="btn btn-success btn-sm edit_data"> <i
+                                                                        class="fa fa-edit"></i>Edit</a>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <form
+                                                                    action="{{route('jadwal.destroy', $data->id_jadwal)}}"
+                                                                    method="post">
+                                                                    @method('delete')
+                                                                    @csrf
+                                                                    <button class="btn btn-danger btn-sm hapus_data"> <i
+                                                                            class="fa fa-trash"></i>Hapus</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
                                                 </tr>
                                                 @endforeach
                                             </tbody>
@@ -146,20 +166,24 @@
 @endsection
 
 @section('script')
-    <script>
-        $('#mapel').on('change', function(){
-            $.ajax({
-                url: "{{ route('murid.chained') }}",
-                type: "GET",
-                data: { id_mapel: $(this).val() },
-                success: function(html){
-                    $('#aktifitas').empty()
-                    $('#aktifitas').append('<option value="">Pilih Aktifitas</option>')
-                    $.each(html.data, function(key, item) {
-                        $('#aktifitas').append('<option value="'+item.id_aktifitas+'">'+item.nama_aktifitas+'</option>')
-                    })
-                }
-            });
-        })
-    </script>
+<script>
+    $('#mapel').on('change', function () {
+        $.ajax({
+            url: "{{ route('murid.chained') }}",
+            type: "GET",
+            data: {
+                id_mapel: $(this).val()
+            },
+            success: function (html) {
+                $('#aktifitas').empty()
+                $('#aktifitas').append('<option value="">Pilih Aktifitas</option>')
+                $.each(html.data, function (key, item) {
+                    $('#aktifitas').append('<option value="' + item.id_aktifitas + '">' +
+                        item.nama_aktifitas + '</option>')
+                })
+            }
+        });
+    })
+
+</script>
 @endsection

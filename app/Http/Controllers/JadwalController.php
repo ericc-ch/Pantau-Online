@@ -73,4 +73,27 @@ class JadwalController extends Controller
         return redirect()->route('jadwal.index');
     }
 
+    public function edit($id_jadwal){
+        $mapel = Mapel::all();
+        $jadwal = Jadwal::find($id_jadwal);
+        return view('murid.editJadwal', compact('jadwal','mapel'));
+    }
+
+    public function update(Request $request, $id_jadwal){
+        $updateJadwal = Jadwal::where('id_jadwal', $id_jadwal);
+        $updateJadwal->update([
+            'tanggal' => $request->tanggal,
+            'jam_mulai' => $request->jam_mulai,
+            'jam_akhir' => $request->jam_akhir,
+            'id_aktifitas' => $request->id_aktifitas,
+            'id_mapel' => $request->id_mapel,
+        ]);
+        return redirect()->route('jadwal.index');
+    }
+
+    public function destroy($id_jadwal){
+        Jadwal::destroy($id_jadwal);
+        return redirect()->route('jadwal.index');
+    }   
+
 }
