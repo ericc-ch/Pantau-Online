@@ -98,7 +98,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Jadwal Hari Ini</h3>
+                                    <h3 class="card-title">Jadwal {{$tgl}}</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="row">
