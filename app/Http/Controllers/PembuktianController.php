@@ -22,12 +22,13 @@ class PembuktianController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $nis = Auth::user()->siswa->nis;
+        $tgl = date('Y-m-d');
         $jadwal = Jadwal::with('mapel')->with('aktifitas')
             ->where('nis', $nis)
-            ->whereDate('tanggal', date('Y-m-d'))
+            ->whereDate('tanggal', $tgl)
             ->get();
 
-        return view('murid.pembuktian', compact('jadwal'));
+        return view('murid.pembuktian', compact('jadwal', 'tgl'));
     }
 
     /**
@@ -67,7 +68,7 @@ class PembuktianController extends Controller
             ->whereDate('tanggal', $tgl)
             ->get();
 
-        return view('murid.pembuktian', compact('jadwal'));
+        return view('murid.pembuktian', compact('jadwal', 'tgl'));
     }
 
     /**
