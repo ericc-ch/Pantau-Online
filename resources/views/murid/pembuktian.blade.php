@@ -28,7 +28,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-6">
-                            <h3 class="card-title">Jadwal </h3>
+                            <h3 class="card-title">Jadwal @if($tgl == date('Y-m-d')){{ $tgl }} @else {{ $tgl }} @endif</h3>
                         </div>
                         <div class="col-md-6">
                             <form action="{{route('pembuktian.alihkan')}}" class="form-data" method="post">
