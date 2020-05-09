@@ -23,16 +23,16 @@ class JadwalController extends Controller
     public function index(Request $request)
     {
         $nis = Auth::user()->siswa->nis;
-        
+        $tgl = date('Y-m-d');
         $jadwal = Jadwal::with('mapel')->with('aktifitas')
             ->where('nis', $nis)
-            ->whereDate('tanggal', date('Y-m-d'))
+            ->whereDate('tanggal', $tgl)
             ->get();
     
         $mapel = Mapel::all();
         $aktifitas = Aktifitas::all();
 
-        return view('murid.setjadwal', compact('jadwal','mapel','aktifitas'));
+        return view('murid.setjadwal', compact('jadwal','mapel','aktifitas', 'tgl'));
     }
     public function getAktifitas()
     {
@@ -70,7 +70,21 @@ class JadwalController extends Controller
             'id_mapel' => $request->id_mapel,
             'validasi' => 'no'
         ]);
-        return redirect()->route('jadwal.index');
+        return redirect()->route('jadwal.cari', $request->tanggal);
+    }
+
+    public function cari($tgl){
+        $nis = Auth::user()->siswa->nis;
+        
+        $jadwal = Jadwal::with('mapel')->with('aktifitas')
+            ->where('nis', $nis)
+            ->whereDate('tanggal', $tgl)
+            ->get();
+    
+        $mapel = Mapel::all();
+        $aktifitas = Aktifitas::all();
+
+        return view('murid.setjadwal', compact('jadwal','mapel','aktifitas','tgl'));
     }
 
     public function edit($id_jadwal){
