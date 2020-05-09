@@ -22,6 +22,7 @@ class JadwalController extends Controller
      */
     public function index(Request $request)
     {
+        date_default_timezone_set('Asia/Jakarta');
         $nis = Auth::user()->siswa->nis;
         $tgl = date('Y-m-d');
         $jadwal = Jadwal::with('mapel')->with('aktifitas')
