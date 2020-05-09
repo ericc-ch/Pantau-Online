@@ -20,6 +20,7 @@ class PembuktianController extends Controller
      */
     public function index()
     {
+        date_default_timezone_set('Asia/Jakarta');
         $nis = Auth::user()->siswa->nis;
         $jadwal = Jadwal::with('mapel')->with('aktifitas')
             ->where('nis', $nis)
@@ -130,14 +131,4 @@ class PembuktianController extends Controller
         return redirect()->route('pembuktian.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
