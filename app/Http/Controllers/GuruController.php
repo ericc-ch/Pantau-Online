@@ -102,14 +102,46 @@ class GuruController extends Controller
     }
     public function laporan_siswa_rayon_detail($nis)
     {
-        $ps = Auth::user()->guru->ps;
-
-        $siswa = Siswa::select('nis', 'nama', 'rombel')->where('nis', $nis)->first();
-
-        $laporans = Jadwal::join('siswas', 'jadwal.nis', '=', 'siswas.nis')
+        $ps_all = Auth::user()->guru->ps;
+        
+        if ( strpos($ps_all, ',') != false ) {
+            $ps = explode(', ', $ps_all);
+            $siswa = Siswa::select('nis', 'nama', 'rombel')->where('nis', $nis)->first();
+            $laporans = Jadwal::join('siswas', 'jadwal.nis', '=', 'siswas.nis')
+                            ->where('jadwal.nis', $nis)
+                            ->where('siswas.rayon', $ps[0])
+                            ->get();
+        }else{
+            $ps = $ps_all;
+            $siswa = Siswa::select('nis', 'nama', 'rombel')->where('nis', $nis)->first();
+            $laporans = Jadwal::join('siswas', 'jadwal.nis', '=', 'siswas.nis')
                         ->where('jadwal.nis', $nis)
                         ->where('siswas.rayon', $ps)
                         ->get();
+        }
+
+        return view('guru.laporan.detail-laporan', compact('laporans', 'siswa'));
+    }
+
+    public function laporan_siswa_rayon_detail_kedua($nis)
+    {
+        $ps_all = Auth::user()->guru->ps;
+        
+        if ( strpos($ps_all, ',') != false ) {
+            $ps = explode(', ', $ps_all);
+            $siswa = Siswa::select('nis', 'nama', 'rombel')->where('nis', $nis)->first();
+            $laporans = Jadwal::join('siswas', 'jadwal.nis', '=', 'siswas.nis')
+                            ->where('jadwal.nis', $nis)
+                            ->where('siswas.rayon', $ps[1])
+                            ->get();
+        }else{
+            $ps = $ps_all;
+            $siswa = Siswa::select('nis', 'nama', 'rombel')->where('nis', $nis)->first();
+            $laporans = Jadwal::join('siswas', 'jadwal.nis', '=', 'siswas.nis')
+                        ->where('jadwal.nis', $nis)
+                        ->where('siswas.rayon', $ps)
+                        ->get();
+        }
 
         return view('guru.laporan.detail-laporan', compact('laporans', 'siswa'));
     }

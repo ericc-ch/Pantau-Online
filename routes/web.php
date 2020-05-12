@@ -45,6 +45,7 @@ Route::group(['prefix' => 'guru'], function() {
     Route::get('/laporan/rayon', 'GuruController@laporan_siswa_rayon')->name('guru.laporansiswa.rayon');
     Route::get('/laporan/rayon/kedua', 'GuruController@laporan_siswa_rayon_kedua')->name('guru.laporansiswa.rayon.kedua');
     Route::get('/laporan/rayon/{nis}', 'GuruController@laporan_siswa_rayon_detail')->name('guru.laporansiswa.rayon.detail');
+    Route::get('/laporan/rayon/kedua/{nis}', 'GuruController@laporan_siswa_rayon_detail_kedua')->name('guru.laporansiswa.rayon.detail.kedua');
 });
 
 Route::group(['prefix' => 'ortu'], function() {

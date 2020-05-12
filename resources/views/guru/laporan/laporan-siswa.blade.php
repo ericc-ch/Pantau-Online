@@ -40,7 +40,11 @@
                               @if( request()->routeIs('guru.laporansiswa') )
                                 <button class="btn btn-info" onclick="document.location.href='{{ route('guru.laporansiswa.detail', $laporan->nis) }}';">Detail</button>
                               @else
+                                @if( request()->routeIs('guru.laporansiswa.rayon.kedua') )
+                                    <button class="btn btn-info" onclick="document.location.href='{{ route('guru.laporansiswa.rayon.detail.kedua', $laporan->nis) }}';">Detail</button>
+                                @else
                                 <button class="btn btn-info" onclick="document.location.href='{{ route('guru.laporansiswa.rayon.detail', $laporan->nis) }}';">Detail</button>
+                                @endif
                               @endif
                           </td>
                       </tr>
