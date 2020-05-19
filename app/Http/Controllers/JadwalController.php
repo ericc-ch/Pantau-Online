@@ -105,9 +105,9 @@ class JadwalController extends Controller
         return redirect()->route('jadwal.index');
     }
 
-    public function destroy($id_jadwal){
+    public function destroy(Request $request, $id_jadwal){
         Jadwal::destroy($id_jadwal);
-        return redirect()->route('jadwal.index');
+        return redirect()->route('jadwal.cari', $request->tanggal);
     }   
 
 }

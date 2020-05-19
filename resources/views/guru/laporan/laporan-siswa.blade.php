@@ -27,6 +27,9 @@
                           <th>No</th>
                           <th>NIS</th>
                           <th>Nama</th>
+                          <th>Jenis Kelamin</th>
+                          <th>Rayon</th>
+                          <th>Rombel</th>
                           <th>Detail</th>
                       </tr>
                   </thead>
@@ -36,11 +39,17 @@
                           <td>{{ $loop->iteration }}</td>
                           <td>{{ $laporan->nis }}</td>
                           <td>{{ $laporan->nama }}</td>
+                          <td>{{ $laporan->rayon }}</td>
+                          <td>{{ $laporan->rombel }}</td>
+                          <td>{{ $laporan->jk }}</td>
+
                           <td>
                               @if( request()->routeIs('guru.laporansiswa') )
                                 <button class="btn btn-info" onclick="document.location.href='{{ route('guru.laporansiswa.detail', $laporan->nis) }}';">Detail</button>
-                              @else
+                              @elseif(request()->routeIs('guru.laporansiswa.rayon'))
                                 <button class="btn btn-info" onclick="document.location.href='{{ route('guru.laporansiswa.rayon.detail', $laporan->nis) }}';">Detail</button>
+                              @else
+                                <button class="btn btn-info" onclick="document.location.href='{{ route('guru.laporansiswa.seluruh.detail', $laporan->nis) }}';">Detail</button>
                               @endif
                           </td>
                       </tr>

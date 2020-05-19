@@ -36,7 +36,6 @@ Route::group(['prefix' => 'guru'], function() {
     Route::get('/dashboard', function() {
         return view('guru.index');
     })->name('guru.dashboard')->middleware('cekuser:guru');
-
     Route::get('/siswa/rombel', 'GuruController@siswa_pj')->name('guru.siswa.pj');
     Route::get('/siswa/rayon', 'GuruController@siswa_ps')->name('guru.siswa.ps');
     Route::get('/siswa/rayon/kedua', 'GuruController@siswa_ps_kedua')->name('guru.siswa.ps.kedua');
@@ -45,6 +44,9 @@ Route::group(['prefix' => 'guru'], function() {
     Route::get('/laporan/rayon', 'GuruController@laporan_siswa_rayon')->name('guru.laporansiswa.rayon');
     Route::get('/laporan/rayon/kedua', 'GuruController@laporan_siswa_rayon_kedua')->name('guru.laporansiswa.rayon.kedua');
     Route::get('/laporan/rayon/{nis}', 'GuruController@laporan_siswa_rayon_detail')->name('guru.laporansiswa.rayon.detail');
+    //seluruh
+    Route::get('/laporan/seluruh', 'GuruController@laporan_siswa_seluruh')->name('guru.laporansiswa.seluruh');
+    Route::get('/laporan/seluruh/{nis}', 'GuruController@laporan_siswa_seluruh_detail')->name('guru.laporansiswa.seluruh.detail');
 });
 
 Route::group(['prefix' => 'ortu'], function() {

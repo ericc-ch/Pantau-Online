@@ -113,4 +113,24 @@ class GuruController extends Controller
 
         return view('guru.laporan.detail-laporan', compact('laporans', 'siswa'));
     }
+
+    //laporan seluruh
+    public function laporan_siswa_seluruh(){
+        $laporans = Siswa::all();    
+        return view('guru.laporan.laporan-siswa', compact('laporans'));
+    }
+
+    //detail laporan seluruh siswa
+    public function laporan_siswa_seluruh_detail($nis)
+    {
+        $ps = Auth::user()->guru->ps;
+
+        $siswa = Siswa::select('nis', 'nama', 'rombel')->where('nis', $nis)->first();
+
+        $laporans = Jadwal::join('siswas', 'jadwal.nis', '=', 'siswas.nis')
+                    ->where('jadwal.nis', $nis)
+                    ->get();
+
+        return view('guru.laporan.detail-laporan', compact('laporans', 'siswa'));
+    }
 }
