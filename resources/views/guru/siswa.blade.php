@@ -19,9 +19,9 @@
 
     <!-- Main content -->
     <section class="content">
-    <div class="callout callout-info">
-              <h5><i class="fas fa-info"></i> Note:</h5>
-              <table id="table" class="table table-bordered">
+        <div class="callout callout-info">
+            <div class="table-responsive">
+              <table id="table" class="table table-hover">
                   <thead>
                       <tr>
                           <th>No</th>
@@ -43,6 +43,7 @@
                       @endforeach
                   </tbody>
               </table>
+              </div>
             </div>
     </section>
     <!-- /.content -->

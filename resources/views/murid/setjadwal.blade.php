@@ -129,11 +129,11 @@
                                                             </div>
                                                             <div class="col-lg-4">
                                                                 <form
-                                                                    action="{{route('jadwal.destroy', $data->id_jadwal)}}"
+                                                                    action="{{route('jadwal.destroy', $data->id_jadwal, $data->tanggal)}}"
                                                                     method="post">
                                                                     @method('delete')
                                                                     @csrf
-                                                                    <input type="hidden" value="{{$data->tanggal}}" name="tanggal">
+                                                                     <input type="hidden" value="{{$data->tanggal}}" name="tanggal">
                                                                     <button class="btn btn-danger btn-sm hapus_data"> <i
                                                                             class="fa fa-trash"></i>Hapus</button>
                                                                 </form>

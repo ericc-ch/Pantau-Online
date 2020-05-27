@@ -49,7 +49,7 @@
             </div>
             @endif
         </div>
-
+        <div class="table-responsive">
         <table class="table table-bordered" id="table">
             <thead align="center">
                 <tr>
@@ -64,17 +64,11 @@
                 @foreach( $laporans as $lap )
                 <tr>
                     <td>{{ $lap->tanggal }}</td>
-                    <td>{{ $lap->aktifitas->nama_aktifitas }}</td>
-                    <td>{{ $lap->mapel->nama_mapel }}</td>
-                    @if ( empty($lap->bukti) && $lap->validasi == 'no' )
+                    <td style="text-align:left">{{ $lap->aktifitas->nama_aktifitas }}</td>
+                    <td style="text-align:left">{{ $lap->mapel->nama_mapel }}</td>
+                    @if ( empty($lap->bukti) )
                         <td><span class="badge badge-warning">Belum mengumpulkan</span></td>
                         <td><span class="badge badge-warning">Belum mengumpulkan</span></td>
-                    @elseif ( !empty($lap->bukti) && $lap->validasi == 'no' )
-                        <td><img src="{{ asset('bukti/'. $lap->rombel .'/'. $lap->mapel->nama_mapel .'/'. $lap->bukti) }}" width="70px" alt="Gambar Bukti"></td>
-                        <td><span class="badge badge-warning">Belum diverifikasi ortu</span></td>
-                    @elseif ( empty($lap->bukti) && $lap->validasi == 'yes' )
-                        <td><span class="badge badge-warning">Belum mengumpulkan</span></td>
-                        <td><span class="badge badge-warning">Belum diverifikasi ortu</span></td>
                     @else
                         <td><img src="{{ asset('bukti/'. $lap->rombel .'/'. $lap->mapel->nama_mapel .'/'. $lap->bukti) }}" width="70px" alt="Gambar Bukti"></td>
                         <td>
@@ -88,6 +82,7 @@
                 @endforeach
             </tbody>
         </table>
+        </div>
     </div>
     </section>
     <!-- /.content -->

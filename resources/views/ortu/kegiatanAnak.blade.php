@@ -64,8 +64,6 @@
                                                 <th>Aktifitas</th>
                                                 <th>Mapel</th>
                                                 <th>Bukti</th>
-                                                <th>Status Verifikasi</th>
-                                                <th>Verifikasi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -92,25 +90,6 @@
                                                     @else 
                                                     <span class="badge badge-warning">Belum Ada Bukti</span>
                                                     @endif
-                                                </td>
-                                                <td>
-                                                    @if ($data->bukti)
-                                                        @if ($data->validasi == 'yes')
-                                                        <span class="badge badge-info">Sudah Verifikasi</span>
-                                                        @else
-                                                        <span class="badge badge-warning">Belum Verifikasi</span>
-                                                        @endif
-                                                    @else
-                                                        <span class="badge badge-warning">Belum Ada Bukti</span>
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                <form method="POST"
-                                                        action="{{route('ortu.update', $data->id_jadwal)}}">
-                                                        @method('patch')
-                                                        @csrf
-                                                        <button type="submit" class="btn btn-sm btn-info">Verifikasi</button>
-                                                    </form>
                                                 </td>
                                             </tr>
                                             @endforeach

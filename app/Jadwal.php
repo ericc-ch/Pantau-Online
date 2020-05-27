@@ -11,7 +11,7 @@ class Jadwal extends Model
     protected $primaryKey = 'id_jadwal';
 
     protected $fillable = [
-        'nis','tanggal','jam_mulai','jam_akhir','id_aktifitas','id_mapel','bukti','bukti_lainnya','validasi'
+        'nis','tanggal','jam_mulai','jam_akhir','id_aktifitas','id_mapel','bukti','bukti_lainnya'
     ];
 
     public function siswa()
