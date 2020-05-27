@@ -89,6 +89,18 @@
                         </li>
                     @endif
                 @endif
+                @if( !empty(Auth::user()->guru->id_mapel) )
+                    @if(Auth::user()->guru->id_mapel == 'Pendidikan Agama Islam' || Auth::user()->guru->id_mapel == 'Pendidikan Kewarganegaraan' || Auth::user()->guru->id_mapel == 'PJOK' || Auth::user()->guru->id_mapel == 'Sejarah Indonesia')
+                    <li class="nav-item">
+                            <a href="{{ route('guru.laporansiswa.seluruh') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Laporan Seluruh siswa
+                                </p>
+                            </a>
+                        </li>
+                    @endif
+                @endif
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

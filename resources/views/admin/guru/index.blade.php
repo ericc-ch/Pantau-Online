@@ -27,7 +27,6 @@
                             <th style="width: 5%">No</th>
                             <th>Nama</th>
                             <th>NIP</th>
-                            <th>Mapel</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,7 +35,7 @@
                             <td align="center">{{ $loop->iteration }}</td>
                             <td>{{ $guru->nama }}</td>
                             <td>{{ $guru->nip }}</td>
-                            <td>{{ $guru->mapel->nama_mapel }}</td>
+                           
                         </tr>
                         @endforeach
                     </tbody>
