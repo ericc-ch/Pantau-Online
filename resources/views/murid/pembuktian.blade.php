@@ -46,6 +46,28 @@
                                 </div>
                             </form>
                         </div>
+                        <!-- INI YANG VERSI HPNYA GOOD -->
+                        <!--<div class="col-md-12">-->
+                        <!--    <h4 class="display-5">Jadwal </h4>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-12 mb-2 mt-2">-->
+                        <!--    <form action="{{route('pembuktian.alihkan')}}" class="form-inline float-right" method="post">-->
+                        <!--    @csrf-->
+                        <!--        <div class="col-md-12">-->
+                        <!--            <div class="row">-->
+                        <!--                <div class="form-group">-->
+                        <!--                    <input type="date" name="tanggal" style="width: 150px;" id="tanggal" class="form-control"-->
+                        <!--                            required="true">-->
+                        <!--                </div>-->
+                        <!--                <div class="form-group ml-2">-->
+                        <!--                    <button type="submit" id="simpan" class="btn btn-primary">-->
+                        <!--                        <i class="fa fa-seacrh"></i> cari-->
+                        <!--                    </button>-->
+                        <!--                </div>-->
+                        <!--            </div>-->
+                        <!--        </div>-->
+                        <!--    </form>-->
+                        <!--</div>-->
                     </div>
 
 

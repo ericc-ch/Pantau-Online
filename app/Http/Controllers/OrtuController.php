@@ -22,14 +22,14 @@ class OrtuController extends Controller
             ->get();
         return view('ortu.kegiatanAnak', compact('jadwal'));
     }
-    public function update($id_jadwal)
-    {
-        Jadwal::where('id_jadwal', $id_jadwal)
-        ->update([
-            'validasi' => 'yes'
-        ]);
-        return redirect()->route('ortu.kegiatan-anak');
-    }
+    // public function update($id_jadwal, Request $request )
+    // {
+    //     $jadwal = Jadwal::where('id_jadwal', $id_jadwal);
+    //     $jadwal->update([
+    //         'validasi' => 'yes'
+    //     ]);
+    //     return redirect()->route('ortu.cari', $request->tanggal);
+    // }
     public function alihkan(Request $request )
     {
         $tgl = $request->tanggal;

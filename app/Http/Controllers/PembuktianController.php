@@ -27,7 +27,6 @@ class PembuktianController extends Controller
             ->where('nis', $nis)
             ->whereDate('tanggal', $tgl)
             ->get();
-
         return view('murid.pembuktian', compact('jadwal', 'tgl'));
     }
 
@@ -129,7 +128,17 @@ class PembuktianController extends Controller
             ]);
         }
 
-        return redirect()->route('pembuktian.index');
+        return redirect()->route('pembuktian.cari', $jadwal->tanggal);
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
 }

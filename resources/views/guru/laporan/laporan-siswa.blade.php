@@ -20,16 +20,13 @@
     <!-- Main content -->
     <section class="content">
     <div class="callout callout-info">
-              <h5><i class="fas fa-info"></i> Note:</h5>
+        <div class="table-responsive">
               <table class="table table-bordered" id="table">
                   <thead align="center">
                       <tr>
                           <th>No</th>
                           <th>NIS</th>
                           <th>Nama</th>
-                          <th>Jenis Kelamin</th>
-                          <th>Rayon</th>
-                          <th>Rombel</th>
                           <th>Detail</th>
                       </tr>
                   </thead>
@@ -38,24 +35,23 @@
                       <tr>
                           <td>{{ $loop->iteration }}</td>
                           <td>{{ $laporan->nis }}</td>
-                          <td>{{ $laporan->nama }}</td>
-                          <td>{{ $laporan->rayon }}</td>
-                          <td>{{ $laporan->rombel }}</td>
-                          <td>{{ $laporan->jk }}</td>
-
+                          <td style="text-align:left">{{ $laporan->nama }}</td>
                           <td>
                               @if( request()->routeIs('guru.laporansiswa') )
                                 <button class="btn btn-info" onclick="document.location.href='{{ route('guru.laporansiswa.detail', $laporan->nis) }}';">Detail</button>
-                              @elseif(request()->routeIs('guru.laporansiswa.rayon'))
-                                <button class="btn btn-info" onclick="document.location.href='{{ route('guru.laporansiswa.rayon.detail', $laporan->nis) }}';">Detail</button>
-                              @else
-                                <button class="btn btn-info" onclick="document.location.href='{{ route('guru.laporansiswa.seluruh.detail', $laporan->nis) }}';">Detail</button>
+                                @elseif(request()->routeIs('guru.laporansiswa.rayon'))
+                              <button class="btn btn-info" onclick="document.location.href='{{ route('guru.laporansiswa.rayon.detail', $laporan->nis) }}';">Detail</button>
+                                @elseif( request()->routeIs('guru.laporansiswa.rayon.kedua') )
+                                    <button class="btn btn-info" onclick="document.location.href='{{ route('guru.laporansiswa.rayon.detail.kedua', $laporan->nis) }}';">Detail</button>
+                               @else
+                               <button class="btn btn-info" onclick="document.location.href='{{ route('guru.laporansiswa.seluruh.detail', $laporan->nis) }}';">Detail</button>
                               @endif
                           </td>
                       </tr>
                       @endforeach
                   </tbody>
               </table>
+              </div>
             </div>
     </section>
     <!-- /.content -->

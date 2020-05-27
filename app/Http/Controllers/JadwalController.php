@@ -69,11 +69,9 @@ class JadwalController extends Controller
             'jam_akhir' => $request->jam_akhir,
             'id_aktifitas' => $request->id_aktifitas,
             'id_mapel' => $request->id_mapel,
-            'validasi' => 'no'
         ]);
         return redirect()->route('jadwal.cari', $request->tanggal);
     }
-
     public function cari($tgl){
         $nis = Auth::user()->siswa->nis;
         
@@ -103,12 +101,12 @@ class JadwalController extends Controller
             'id_aktifitas' => $request->id_aktifitas,
             'id_mapel' => $request->id_mapel,
         ]);
-        return redirect()->route('jadwal.index');
+        return redirect()->route('jadwal.cari', $request->tanggal);
     }
 
-    public function destroy(Request $request, $id_jadwal){
+    public function destroy( Request $request, $id_jadwal){
         Jadwal::destroy($id_jadwal);
-        return redirect()->route('jadwal.cari', $request->tanggal);
+        return redirect()->route('jadwal.cari', $request->tanggal );
     }   
 
 }

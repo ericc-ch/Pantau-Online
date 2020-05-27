@@ -27,6 +27,8 @@
                             <th style="width: 5%">No</th>
                             <th>Nama</th>
                             <th>NIP</th>
+                            <th>PS</th>
+                            <th>PJ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,7 +37,8 @@
                             <td align="center">{{ $loop->iteration }}</td>
                             <td>{{ $guru->nama }}</td>
                             <td>{{ $guru->nip }}</td>
-                           
+                            <td>{{ $guru->ps }}</td>
+                            <td>{{ $guru->pj }}</td>
                         </tr>
                         @endforeach
                     </tbody>

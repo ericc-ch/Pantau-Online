@@ -77,7 +77,8 @@ class AdminSiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Siswa::create($request->all());
+        return redirect()->route('admin.siswa.index');
     }
 
     /**
@@ -97,9 +98,15 @@ class AdminSiswaController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($nis)
     {
-        //
+        $edit = Siswa::find($nis);
+        $rombels = $this->rombel();
+        $rayons = $this->rayon();
+
+        $siswas = Siswa::orderBy('nama', 'ASC')->get();
+
+        return view('admin.siswa.index', compact('siswas', 'rombels', 'rayons','edit'));
     }
 
     /**
@@ -109,9 +116,10 @@ class AdminSiswaController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request,$nis)
     {
-        //
+        Siswa::find($nis)->update($request->all());
+        return redirect()->route('admin.siswa.index');
     }
 
     /**
